@@ -1,0 +1,14 @@
+composer create-project symfony/skeleton 
+composer require api
+composer require annotations
+composer require maker --dev
+composer require doctrine
+composer require security
+php bin/console make:user
+php bin/console doctrine:database:create
+php bin/console make:migration
+php bin/console make:controller
+composer require symfony/web-server-bundle --dev
+composer require serializer
+php bin/console make:auth
+0
