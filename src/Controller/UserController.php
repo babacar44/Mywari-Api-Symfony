@@ -6,10 +6,14 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+
 
 /**
  * @Route("/api")
@@ -17,76 +21,105 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/register", name="api_register", methods={"POST"})
+     * @Route("/ajoutAdmin", name="admin_register", methods={"POST"})
+     * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN')")
+     * 
      */
-    public function register(ObjectManager $om, UserPasswordEncoderInterface $passwordEncoder, Request $request)
+    public function registerPartenaire(ObjectManager $om, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
     {
         $user = new User();
+   $email                  = $request->request->get("email");
+   $password               = $request->request->get("password");
+   $passwordConfirmation   = $request->request->get("password_confirmation");
 
-        //recuperation des donnees saisies
-        $email                  = $request->request->get("email");
-        $password               = $request->request->get("password");
-        $passwordConfirmation   = $request->request->get("password_confirmation");
-        $roles                  = $request->request->get("roles");
 
-        $errors = [];
+    $roles = $request->request->get("roles");
+    $nomcomplet = $request->request->get("nomComplet");
+    $propriete = $request->request->get("propriete");
+    $adresse = $request->request->get("adresse");
+    $telephone = $request->request->get("telephone");
+    $statut = $request->request->get("statut");
 
-        if ($password != $passwordConfirmation) {
-            $errors[] = "Les Mots de passe ne correspondent pas";
-        }
-        if (strlen($password) < 6) {
-            $errors[] = "Le mot de passe doit etre supérieur à 6 caracteres";
-        }
+   $errors = [];
+   if($password != $passwordConfirmation)
+   {
+       $errors[] = "Password does not match the password confirmation.";
+   }
+   if(strlen($password) < 6)
+   {
+       $errors[] = "Password should be at least 6 characters.";
+   }
+   if(!$errors)
+   {
+       $encodedPassword = $passwordEncoder->encodePassword($user, $password);
+       $user->setEmail($email);
+       $user->setPassword($encodedPassword);
+    if ($this->get("security.authorization_checker")->isGranted("ROLE_SUPER_ADMIN")) {
+        $user->setRoles(["ROLE_ADMIN"]);
+    }
+    else  {
+            $user->setRoles(["ROLE_USER"]);
+    } 
+       $user->setNomComplet($nomcomplet);
+       $user->setPropriete($propriete);
+       $user->setAdresse($adresse);
+       $user->setTelephone($telephone);
+       $user->setStatut($statut);
 
-        if (!$errors)
+       $entityErrors = $validator->validate($user);
+        if(count($entityErrors) == 0)
         {
-            
-            $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-            $user->setEmail($email);
-            $user->setPassword($encodedPassword);
-            $user->setRoles($roles);
-            
-            try {
-             
-                $om->persist($user);
-                $om->flush();
-
+            // Save entity
+            $om->persist($user);
+            $om->flush();
                 return $this->json([
-                    'user' => $user
+                    'user' => $user,
+                    'status' => 201,
+                'message' => 'L\' AdminPartenaire a été créé'
                 ]);
-
-            } catch (UniqueConstraintViolationException $e) {
-              
-                $errors[] = "L'email saisi existe deja dans la base";
-            }
-            catch(\Exception $e)
-            {
-                $errors[] = "Unable to save new user at this time.";
-            }
         }
-
+        else
+        {
+        foreach($entityErrors as $error)
+        {
+            $errors[] = $error->getMessage();
+        }
+                }
+        }
         return $this->json([
             'errors' => $errors
         ], 400);
+        }
 
-    }
     /**
      * @Route("/login", name="api_login",  methods={"POST"})
+     * 
      */
     public  function login(){
         return $this->json([
-            'result' => true
+            'result' => 'Login validé'
         ]);
     }
 
     /**
      * @Route("/profile", name="api_profile")
-     * @IsGranted("ROLE_USER")
+     * 
      */
-    public function profil(){
+    public function profile()
+    {
         return $this->json([
             'user' => $this->getUser()
+        ], 200, [], [
+            'groups' => ['api']
         ]);
+    }
+
+    /**
+     * @Route("/", name="api_home")
+     */
+    public function home()
+    {
+    return $this->json(['result' => true]);
     }
  }
 
