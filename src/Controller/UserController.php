@@ -21,11 +21,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/ajoutAdmin", name="admin_register", methods={"POST"})
+     * @Route("/ajout", name="admin_register", methods={"POST"})
      * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN')")
      * 
      */
-    public function registerPartenaire(ObjectManager $om, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
+    public function register(ObjectManager $om, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
     {
         $user = new User();
    $email                  = $request->request->get("email");
@@ -102,6 +102,7 @@ class UserController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_SUPER_ADMIN")
      * @Route("/profile", name="api_profile")
      * 
      */

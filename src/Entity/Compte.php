@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CompteRepository")
+ * @UniqueEntity("numCompte")
+ * 
  */
 class Compte
 {
@@ -25,6 +30,8 @@ class Compte
 
     /**
      * @ORM\Column(type="integer")
+     * LessThanOrEqual:
+     *               value: 0
      */
     private $solde;
 
@@ -35,6 +42,7 @@ class Compte
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Depot", mappedBy="depot")
+     * 
      */
     private $depots;
 

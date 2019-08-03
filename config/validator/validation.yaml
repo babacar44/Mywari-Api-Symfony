@@ -1,0 +1,30 @@
+# App\Entity\Compte:
+#     properties:
+#         numCompte:
+#             - Unique: ~  
+
+#         solde:
+#             - PositiveOrZero: ~
+
+# App\Entity\Depot:
+#     properties:
+#         montant:
+#             - LessThanOrEqual:
+#                   value: 75000               
+
+# App\Entity\Partenaire:
+#     properties:
+#         ninea:
+#             - Unique: ~   
+
+#         raisonSociale:    
+#             - Unique: ~
+
+#         telephone :
+#             - Unique: ~
+
+#         email:
+#             - Unique: ~
+#             - Email:
+#                 message: The email "{{ value }}" is not a valid email.
+#                 checkMX: true                

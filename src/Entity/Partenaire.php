@@ -9,8 +9,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields={"ninea"}, message="This ninea is already in use.")
+ * 
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
+ * @UniqueEntity("telephone")
+ * @UniqueEntity("raisonSociale")
  */
 class Partenaire
 {
@@ -28,22 +30,30 @@ class Partenaire
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "raisonSociale cannot be empty.")
      */
     private $raisonSociale;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *  @Assert\NotBlank(message = "nomComplet cannot be empty.")
      */
     private $nomComplet;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=10)
+     * @Assert\NotBlank(message = "telephone cannot be empty.")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid phoneNumber.")
+     * 
      */
     private $telephone;
 
     /**
-     * @Assert\Email(message = "The email {{ value }} is not a valid email.")
+     *@Assert\Email(message = "Email n'est pas bon.")
      * @Assert\NotBlank(message = "Email cannot be empty.")
+     * 
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -51,6 +61,7 @@ class Partenaire
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "adresse cannot be empty.")
      */
     private $adresse;
 

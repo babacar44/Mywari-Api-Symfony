@@ -9,9 +9,12 @@ use FOS\RestBundle\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -25,18 +28,35 @@ class PartenaireController extends AbstractController
      * @IsGranted("ROLE_SUPER_ADMIN")
      * 
      */
-    public function createPartenaire(Request $request, UserPasswordEncoderInterface $passwordEncoder )
+    public function createPartenaire(Request $request, SerializerInterface $serializer,ValidatorInterface $validator, UserPasswordEncoderInterface $passwordEncoder )
     {
         /**
          *@var Serializer $serializer
          */
         $serializer = $this->get('serializer');
         $compte = $serializer->deserialize($request->getContent(),Compte::class ,'json');
-        $random1 = random_int(151, 999);
-        $random2 = random_int(151, 999);
+      
+
+
+        $som=0;
+        $random1 = random_int(001, 999);
+        $random2 = random_int(001, 999);
         $random3 = random_int(151, 999);
+
         $random = $random1.$random2.$random3;
+        $randomNinea =strval($random1.$random2);
+        
         $compte->setnumCompte($random);
+        $compte->setSolde($som);
+
+        $errors = $validator->validate($compte);
+
+        if(count($errors)) {
+            $errors = $serializer->serialize($errors, 'json');
+            return new Response($errors, 500, [
+                'Content-Type' => 'application/json'
+            ]);
+        }
 
         $em =$this->getDoctrine()->getManager();
         $em->persist($compte);
@@ -44,13 +64,23 @@ class PartenaireController extends AbstractController
 
         $value = json_decode($request->getContent());
         $partenaire = new Partenaire();
-        $partenaire->setNinea($value->ninea);
+        $partenaire->setNinea($randomNinea);
         $partenaire->setRaisonSociale($value->raisonSociale);
         $partenaire->setNomComplet($value->nomComplet);
         $partenaire->setTelephone($value->telephone);
         $partenaire->setEmail($value->email);
         $partenaire->setAdresse($value->adresse);
         $partenaire->addPartenaire($compte);
+
+        $errors = $validator->validate($partenaire);
+
+        if(count($errors)) {
+            $errors = $serializer->serialize($errors, 'json');
+            return new Response($errors, 500, [
+                'Content-Type' => 'application/json'
+            ]);
+        }
+
         $em->persist($partenaire);
         $em->flush();
         $data = [
@@ -68,6 +98,16 @@ class PartenaireController extends AbstractController
         $user->setAdresse($partenaire->getAdresse());
         $user->setTelephone($partenaire->getTelephone());
         $user->setStatut("actif");
+
+        $errors = $validator->validate($user);
+
+        if(count($errors)) {
+            $errors = $serializer->serialize($errors, 'json');
+            return new Response($errors, 500, [
+                'Content-Type' => 'application/json'
+            ]);
+        }
+
 
         $em =$this->getDoctrine()->getManager();
         $em->persist($user);
