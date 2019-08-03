@@ -78,9 +78,9 @@ class UserController extends AbstractController
                 'message' => 'L\' AdminPartenaire a été créé'
                 ]);
         }
-        else
+            else
         {
-        foreach($entityErrors as $error)
+            foreach($entityErrors as $error)
         {
             $errors[] = $error->getMessage();
         }

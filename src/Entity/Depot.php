@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,22 +24,17 @@ class Depot
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date_depot;
+    private $dateDepot;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $caissier;
+    private $Caissier;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="depots")
      */
-    private $comptes;
-
-    public function __construct()
-    {
-        $this->comptes = new ArrayCollection();
-    }
+    private $depot;
 
     public function getId(): ?int
     {
@@ -62,55 +55,36 @@ class Depot
 
     public function getDateDepot(): ?\DateTimeInterface
     {
-        return $this->date_depot;
+        return $this->dateDepot;
     }
 
-    public function setDateDepot(\DateTimeInterface $date_depot): self
+    public function setDateDepot(\DateTimeInterface $dateDepot): self
     {
-        $this->date_depot = $date_depot;
+        $this->dateDepot = $dateDepot;
 
         return $this;
     }
 
     public function getCaissier(): ?string
     {
-        return $this->caissier;
+        return $this->Caissier;
     }
 
-    public function setCaissier(string $caissier): self
+    public function setCaissier(string $Caissier): self
     {
-        $this->caissier = $caissier;
+        $this->Caissier = $Caissier;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Compte[]
-     */
-    public function getComptes(): Collection
+    public function getDepot(): ?Compte
     {
-        return $this->comptes;
+        return $this->depot;
     }
 
-    public function addCompte(Compte $compte): self
+    public function setDepot(?Compte $depot): self
     {
-        if (!$this->comptes->contains($compte)) {
-            $this->comptes[] = $compte;
-            $compte->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompte(Compte $compte): self
-    {
-        if ($this->comptes->contains($compte)) {
-            $this->comptes->removeElement($compte);
-            // set the owning side to null (unless already changed)
-            if ($compte->getCategory() === $this) {
-                $compte->setCategory(null);
-            }
-        }
+        $this->depot = $depot;
 
         return $this;
     }

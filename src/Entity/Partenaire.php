@@ -48,20 +48,23 @@ class Partenaire
      */
     private $email;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="idPartenaire")
-     */
-    private $category;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $adresse;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="partenaire")
+     */
+    private $partenaire;
+
     public function __construct()
     {
-        $this->category = new ArrayCollection();
+        $this->partenaire = new ArrayCollection();
     }
+
+    
 
     public function getId(): ?int
     {
@@ -128,37 +131,7 @@ class Partenaire
         return $this;
     }
 
-    /**
-     * @return Collection|Compte[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Compte $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-            $category->setIdPartenaire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Compte $category): self
-    {
-        if ($this->category->contains($category)) {
-            $this->category->removeElement($category);
-            // set the owning side to null (unless already changed)
-            if ($category->getIdPartenaire() === $this) {
-                $category->setIdPartenaire(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getAdresse(): ?string
     {
         return $this->adresse;
@@ -167,6 +140,37 @@ class Partenaire
     public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Compte[]
+     */
+    public function getPartenaire(): Collection
+    {
+        return $this->partenaire;
+    }
+
+    public function addPartenaire(Compte $partenaire): self
+    {
+        if (!$this->partenaire->contains($partenaire)) {
+            $this->partenaire[] = $partenaire;
+            $partenaire->setPartenaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartenaire(Compte $partenaire): self
+    {
+        if ($this->partenaire->contains($partenaire)) {
+            $this->partenaire->removeElement($partenaire);
+            // set the owning side to null (unless already changed)
+            if ($partenaire->getPartenaire() === $this) {
+                $partenaire->setPartenaire(null);
+            }
+        }
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,38 +19,43 @@ class Compte
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="bigint")
      */
-    private $compteBancaire;
+    private $numCompte;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="integer")
      */
     private $solde;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="partenaire")
      */
-    private $idPartenaire;
+    private $partenaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Depot", inversedBy="comptes")
+     * @ORM\OneToMany(targetEntity="App\Entity\Depot", mappedBy="depot")
      */
-    private $category;
+    private $depots;
+
+    public function __construct()
+    {
+        $this->depots = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCompteBancaire(): ?string
+    public function getNumCompte(): ?int
     {
-        return $this->compteBancaire;
+        return $this->numCompte;
     }
 
-    public function setCompteBancaire(string $compteBancaire): self
+    public function setNumCompte(int $numCompte): self
     {
-        $this->compteBancaire = $compteBancaire;
+        $this->numCompte = $numCompte;
 
         return $this;
     }
@@ -65,26 +72,45 @@ class Compte
         return $this;
     }
 
-    public function getIdPartenaire(): ?Partenaire
+    public function getPartenaire(): ?Partenaire
     {
-        return $this->idPartenaire;
+        return $this->partenaire;
     }
 
-    public function setIdPartenaire(?Partenaire $idPartenaire): self
+    public function setPartenaire(?Partenaire $partenaire): self
     {
-        $this->idPartenaire = $idPartenaire;
+        $this->partenaire = $partenaire;
 
         return $this;
     }
 
-    public function getCategory(): ?Depot
+    /**
+     * @return Collection|Depot[]
+     */
+    public function getDepots(): Collection
     {
-        return $this->category;
+        return $this->depots;
     }
 
-    public function setCategory(?Depot $category): self
+    public function addDepot(Depot $depot): self
     {
-        $this->category = $category;
+        if (!$this->depots->contains($depot)) {
+            $this->depots[] = $depot;
+            $depot->setDepot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepot(Depot $depot): self
+    {
+        if ($this->depots->contains($depot)) {
+            $this->depots->removeElement($depot);
+            // set the owning side to null (unless already changed)
+            if ($depot->getDepot() === $this) {
+                $depot->setDepot(null);
+            }
+        }
 
         return $this;
     }
