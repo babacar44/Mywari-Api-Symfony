@@ -84,7 +84,7 @@ class PartenaireController extends AbstractController
         $em->persist($partenaire);
         $em->flush();
         $data = [
-             
+           
             'status' => 201,
             'message' => 'Le partenaire a bien été ajouté'
         ];

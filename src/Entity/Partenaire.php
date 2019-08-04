@@ -41,11 +41,8 @@ class Partenaire
     private $nomComplet;
 
     /**
-     * @ORM\Column(type="integer", length=10)
+     * @ORM\Column(type="bigint", length=255)
      * @Assert\NotBlank(message = "telephone cannot be empty.")
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid phoneNumber.")
      * 
      */
     private $telephone;

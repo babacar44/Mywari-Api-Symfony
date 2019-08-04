@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/ajout", name="admin_register", methods={"POST"})
+     * @Route("/inscription", name="admin_register", methods={"POST"})
      * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN')")
      * 
      */

@@ -53,7 +53,7 @@ class DepotController extends AbstractController
 
         $data = [
             'status' => 201,
-            'message' => 'Dépot'
+            'message' => 'Dépot de '  .$values->montant. ' validé'
         ];
         
         return new JsonResponse($data, 201);
