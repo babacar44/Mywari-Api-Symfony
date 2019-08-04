@@ -122,5 +122,30 @@ class UserController extends AbstractController
     {
     return $this->json(['result' => true]);
     }
- }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
