@@ -31,10 +31,10 @@ class PartenaireController extends AbstractController
     public function createPartenaire(Request $request, SerializerInterface $serializer,ValidatorInterface $validator, UserPasswordEncoderInterface $passwordEncoder )
     {
         /**
-         *@var Serializer $serializer
+         *
          */
         $serializer = $this->get('serializer');
-        $compte = $serializer->deserialize($request->getContent(),Compte::class ,'json');
+        $compte = $serializer->deserialize($request->getContent(), Compte::class ,'json');
       
 
 

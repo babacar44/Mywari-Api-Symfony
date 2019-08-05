@@ -29,7 +29,7 @@ class Partenaire
     private $ninea;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      * @Assert\NotBlank(message = "raisonSociale cannot be empty.")
      */
     private $raisonSociale;

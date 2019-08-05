@@ -22,7 +22,7 @@ class CompteController extends AbstractController
 {
     /**
      * @Route("/addcompte", name="creer_compte", methods={"POST"})
-     * @IsGranted("ROLE_CAISSIER")
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function creer(Request $request, EntityManagerInterface $entityManager,SerializerInterface $serializer, ValidatorInterface $validator)
     {
@@ -47,7 +47,7 @@ class CompteController extends AbstractController
 
         $data = [
             'status' => 201,
-            'message' => 'Compte created'
+            'message' => 'Compte Crée'
         ];
         
         return new JsonResponse($data, 201);

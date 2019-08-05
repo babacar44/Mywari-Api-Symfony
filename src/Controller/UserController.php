@@ -74,7 +74,7 @@ class UserController extends AbstractController
             $om->flush();
                 return $this->json([
                     'user' => $user,
-                    'status' => 201,
+                    'status' => 200,
                 'message' => 'L\' AdminPartenaire a été créé'
                 ]);
         }
