@@ -29,7 +29,7 @@ class Partenaire
     private $ninea;
 
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "raisonSociale cannot be empty.")
      */
     private $raisonSociale;
@@ -43,6 +43,10 @@ class Partenaire
     /**
      * @ORM\Column(type="bigint", length=255)
      * @Assert\NotBlank(message = "telephone cannot be empty.")
+     * @Assert\Regex(
+     *     pattern="/^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\-]*$/",
+     *     match=true,
+     *     message="Votre numero ne doit pas contenir de lettre")
      * 
      */
     private $telephone;

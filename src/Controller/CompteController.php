@@ -24,7 +24,7 @@ class CompteController extends AbstractController
      * @Route("/addcompte", name="creer_compte", methods={"POST"})
      * @IsGranted("ROLE_SUPER_ADMIN")
      */
-    public function creer(Request $request, EntityManagerInterface $entityManager,SerializerInterface $serializer, ValidatorInterface $validator)
+    public function creer(Request $request, EntityManagerInterface $entityManager)
     {
         $value = json_decode($request->getContent());
         $newcompte = new Compte();
@@ -39,9 +39,12 @@ class CompteController extends AbstractController
         $newcompte->setNumCompte($random);
         $newcompte->setSolde($sol);
 
-        $searchId =$this->getDoctrine()->getRepository(Partenaire::class)->find($value->partenaire);
+        $searchid =$this->getDoctrine()->getRepository(Partenaire::class)->findByNinea($value->ninea);
 
-        $newcompte->setPartenaire($searchId);
+        // var_dump($searchid);die();
+
+        $newcompte->setPartenaire($searchid[0]);
+
         $entityManager->persist($newcompte);
         $entityManager->flush();
 

@@ -34,11 +34,11 @@ class DepotController extends AbstractController
                 $depot->setMontant($values->montant);
                 $depot->setDateDepot(new \DateTime());
                 $depot->setCaissier($values->caissier);
-                    $searchId =$this->getDoctrine()->getRepository(Compte::class)->find($values->depot_id);
+                    $searchId =$this->getDoctrine()->getRepository(Compte::class)->findByNumCompte($values->numCompte);
 
-                    $searchId->setSolde($searchId->getSolde() + $values->montant);
+                    $searchId[0]->setSolde($searchId[0]->getSolde() + $values->montant);
 
-            $depot->setDepot($searchId);
+            $depot->setDepot($searchId[0]);
 
             $errors = $validator->validate($depot);
 

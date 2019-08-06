@@ -91,7 +91,7 @@ class PartenaireController extends AbstractController
         
          $user = new User();
         $user->setEmail($partenaire->getEmail());
-        $user->setRoles(["ROLE_ADMIN"]);
+        $user->setRoles(["ROLE_ADMIN_PARTENER"]);
         $user->setPassword($passwordEncoder->encodePassword($user, 'passer'));
         $user->setNomComplet($partenaire->getNomComplet());
         $user->setPropriete($partenaire->getRaisonSociale());

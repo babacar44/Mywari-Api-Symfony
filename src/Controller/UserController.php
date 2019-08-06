@@ -52,19 +52,19 @@ class UserController extends AbstractController
    if(!$errors)
    {
        $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-       $user->setEmail($email);
-       $user->setPassword($encodedPassword);
+       $user->setEmail(trim($email));
+       $user->setPassword(trim($encodedPassword));
     if ($this->get("security.authorization_checker")->isGranted("ROLE_SUPER_ADMIN")) {
-        $user->setRoles(["ROLE_ADMIN"]);
+        $user->setRoles(["ROLE_ADMIN_WARI"]);
     }
     else  {
-            $user->setRoles(["ROLE_USER"]);
+            $user->setRoles($roles);
     } 
-       $user->setNomComplet($nomcomplet);
-       $user->setPropriete($propriete);
-       $user->setAdresse($adresse);
-       $user->setTelephone($telephone);
-       $user->setStatut($statut);
+       $user->setNomComplet(trim($nomcomplet));
+       $user->setPropriete(trim($propriete));
+       $user->setAdresse(trim($adresse));
+       $user->setTelephone(trim($telephone));
+       $user->setStatut(trim($statut));
 
        $entityErrors = $validator->validate($user);
         if(count($entityErrors) == 0)
@@ -123,26 +123,6 @@ class UserController extends AbstractController
     return $this->json(['result' => true]);
     }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

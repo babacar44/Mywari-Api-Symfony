@@ -12,4 +12,5 @@ php bin/console make:controller
 composer require symfony/web-server-bundle --dev
 composer require serializer
 php bin/console make:auth
-0
+
+php bin/console doctrine:fixtures:load

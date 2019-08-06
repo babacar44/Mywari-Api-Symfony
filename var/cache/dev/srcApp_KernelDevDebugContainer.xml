@@ -2608,14 +2608,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.exception</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
@@ -6332,6 +6324,12 @@
         <argument key="easyadmin.filter.type.time" type="service" id="easyadmin.filter.type.time"/>
       </argument>
     </service>
+    <service id=".service_locator.ZIsCxOI" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.7zWnKy7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6356,14 +6354,14 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.1sq_sD8" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.GvkvfhN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\CompteController::creer" type="service" id=".service_locator.7zWnKy7"/>
+        <argument key="App\Controller\CompteController::creer" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController::deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\PartenaireController::createPartenaire" type="service" id=".service_locator..EwH3.j"/>
         <argument key="App\Controller\UserController::register" type="service" id=".service_locator.u_1UsKg"/>
-        <argument key="App\Controller\CompteController:creer" type="service" id=".service_locator.7zWnKy7"/>
+        <argument key="App\Controller\CompteController:creer" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController:deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\PartenaireController:createPartenaire" type="service" id=".service_locator..EwH3.j"/>
         <argument key="App\Controller\UserController:register" type="service" id=".service_locator.u_1UsKg"/>
@@ -6704,12 +6702,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.1sq_sD8"/>
+      <argument type="service" id=".service_locator.GvkvfhN"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.1sq_sD8"/>
+      <argument type="service" id=".service_locator.GvkvfhN"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -7193,7 +7191,7 @@
     <service id="EasyCorp\Bundle\EasyAdminBundle\Search\Paginator" alias="easyadmin.paginator"/>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Search\Autocomplete" alias="easyadmin.autocomplete"/>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Form\Filter\FilterRegistry" alias="easyadmin.filter.registry" public="true"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.1sq_sD8"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.GvkvfhN"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
