@@ -293,3 +293,14 @@ cc1389,127.0.0.1,GET,http://localhost:8000/api/partenaire,1565104651,2ab30b,200
 23d99e,127.0.0.1,POST,http://localhost:8000/api/inscription,1565104807,,400
 31b86b,127.0.0.1,POST,http://localhost:8000/api/inscription,1565104853,,200
 24eb17,127.0.0.1,POST,http://localhost:8000/api/inscription,1565105466,,400
+c885c7,127.0.0.1,POST,http://localhost:8000/api/login,1565107656,,200
+c6fdce,127.0.0.1,POST,http://localhost:8000/api/partenaire,1565107676,,201
+83d691,127.0.0.1,POST,http://localhost:8000/api/inscription,1565107756,,200
+064cbe,127.0.0.1,POST,http://localhost:8000/api/addcompte,1565107836,,201
+fa9678,127.0.0.1,POST,http://localhost:8000/api/login,1565107869,,200
+8a1a51,127.0.0.1,POST,http://localhost:8000/api/depot,1565107935,,201
+91716c,127.0.0.1,POST,http://localhost:8000/api/login,1565107960,,401
+dba361,127.0.0.1,POST,http://localhost:8000/api/login,1565107992,,401
+fb349f,127.0.0.1,POST,http://localhost:8000/api/login,1565108110,,200
+70d6b7,127.0.0.1,POST,http://localhost:8000/api/inscription,1565108178,,200
+f8a145,127.0.0.1,POST,http://localhost:8000/api/inscription,1565108251,,200

@@ -22,7 +22,7 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/inscription", name="admin_register", methods={"POST"})
-     * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN')")
+     * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN_PARTENER')")
      * 
      */
     public function register(ObjectManager $om, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
@@ -75,7 +75,7 @@ class UserController extends AbstractController
                 return $this->json([
                     'user' => $user,
                     'status' => 200,
-                'message' => 'L\' AdminPartenaire a été créé'
+                'message' => 'L\' Utilisateur a été créé'
                 ]);
         }
             else
