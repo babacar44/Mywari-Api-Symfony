@@ -65,11 +65,11 @@ class PartenaireController extends AbstractController
         $value = json_decode($request->getContent());
         $partenaire = new Partenaire();
         $partenaire->setNinea($randomNinea);
-        $partenaire->setRaisonSociale($value->raisonSociale);
-        $partenaire->setNomComplet($value->nomComplet);
-        $partenaire->setTelephone($value->telephone);
-        $partenaire->setEmail($value->email);
-        $partenaire->setAdresse($value->adresse);
+        // $partenaire->setRaisonSociale($value->raisonSociale);
+        // $partenaire->setNomComplet($value->nomComplet);
+        // $partenaire->setTelephone($value->telephone);
+        // $partenaire->setEmail($value->email);
+        // $partenaire->setAdresse($value->adresse);
         $partenaire->addPartenaire($compte);
 
         $errors = $validator->validate($partenaire);
