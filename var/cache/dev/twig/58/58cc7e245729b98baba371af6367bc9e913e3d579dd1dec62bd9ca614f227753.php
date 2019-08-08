@@ -63,6 +63,6 @@ class __TwigTemplate_25da6ebcb572b400a7443dbe34c20d152e5f0d65e5925d1149681d3a84b
     public function getSourceContext()
     {
         return new Source("<?php echo \$view['form']->block(\$form, 'widget_container_attributes') ?>
-", "@Framework/Form/container_attributes.html.php", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/container_attributes.html.php");
+", "@Framework/Form/container_attributes.html.php", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/container_attributes.html.php");
     }
 }

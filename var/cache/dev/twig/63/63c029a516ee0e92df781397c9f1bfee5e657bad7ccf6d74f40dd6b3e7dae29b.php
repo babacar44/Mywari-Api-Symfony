@@ -79,6 +79,6 @@ class __TwigTemplate_ca256f6c1a8f12acc6ea55e5cc39a893fe29a562b36120497a3fd1cc1c2
         return new Source("<?xml version=\"1.0\" encoding=\"{{ _charset }}\" ?>
 
 <error code=\"{{ status_code }}\" message=\"{{ status_text }}\" />
-", "@Twig/Exception/error.xml.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.xml.twig");
+", "@Twig/Exception/error.xml.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.xml.twig");
     }
 }

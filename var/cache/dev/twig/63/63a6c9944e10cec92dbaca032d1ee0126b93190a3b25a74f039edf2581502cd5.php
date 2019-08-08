@@ -2615,6 +2615,6 @@ class __TwigTemplate_ad2e80b3ebc08ded68508668dc40551a7f5cc49fb6a55a4870fd743d5bb
 {% block easyadmin_datetime_filter_widget %}
     {{ block('easyadmin_numeric_filter_widget') }}
 {% endblock  easyadmin_datetime_filter_widget %}
-", "@EasyAdmin/form/bootstrap_4.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/form/bootstrap_4.html.twig");
+", "@EasyAdmin/form/bootstrap_4.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/form/bootstrap_4.html.twig");
     }
 }

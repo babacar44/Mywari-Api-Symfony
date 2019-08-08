@@ -70,6 +70,6 @@ class __TwigTemplate_fb3a9845220b50f3748775b81ced0f0eeabe6a81e104a516659ed503c4c
     public function getSourceContext()
     {
         return new Source("<span class=\"badge badge-secondary\">{{ 'label.object'|trans(domain = 'EasyAdminBundle') }}</span>
-", "@EasyAdmin/default/field_object.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_object.html.twig");
+", "@EasyAdmin/default/field_object.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_object.html.twig");
     }
 }

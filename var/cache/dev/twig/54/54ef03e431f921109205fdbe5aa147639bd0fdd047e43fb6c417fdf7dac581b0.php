@@ -885,6 +885,6 @@ class SvgRenderer {
         return element;
     }
 }
-", "@WebProfiler/Collector/time.js", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.js");
+", "@WebProfiler/Collector/time.js", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.js");
     }
 }

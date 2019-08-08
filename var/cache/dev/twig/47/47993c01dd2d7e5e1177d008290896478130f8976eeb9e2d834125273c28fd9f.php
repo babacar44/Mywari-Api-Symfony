@@ -73,6 +73,6 @@ class __TwigTemplate_226e9a5578703bb1016e8faba86e113ae66bfd41cc922cff4965874441e
         <?php echo \$view['form']->widget(\$form); ?>
     </td>
 </tr>
-", "@Framework/FormTable/button_row.html.php", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/FormTable/button_row.html.php");
+", "@Framework/FormTable/button_row.html.php", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/FormTable/button_row.html.php");
     }
 }

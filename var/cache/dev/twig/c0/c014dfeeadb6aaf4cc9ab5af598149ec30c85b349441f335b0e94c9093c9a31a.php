@@ -122,6 +122,6 @@ class __TwigTemplate_ff18233cee1457524efbdc9cab52a6267ac60842167d6abdcff8d0ce07d
         {% endfor %}
     </tbody>
 </table>
-", "@WebProfiler/Profiler/table.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/table.html.twig");
+", "@WebProfiler/Profiler/table.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/table.html.twig");
     }
 }

@@ -69,6 +69,6 @@ class __TwigTemplate_872aeb44219185ed8f53ae1f4cbb2ff9fdf3c585ee646ca53a3e165bb4a
     public function getSourceContext()
     {
         return new Source("{{ include('@Twig/Exception/error.xml.twig') }}
-", "@Twig/Exception/error.rdf.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.rdf.twig");
+", "@Twig/Exception/error.rdf.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.rdf.twig");
     }
 }

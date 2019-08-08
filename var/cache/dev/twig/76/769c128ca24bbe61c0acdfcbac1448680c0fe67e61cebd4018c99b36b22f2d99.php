@@ -73,6 +73,6 @@ class __TwigTemplate_c0cb6b71d9a48d18c2cbd084eb5f7cf44fcae6d36921ef0a0e5cfa4c52e
     <?php \$help = false === \$help_html ? \$view->escape(\$help) : \$help ?>
     <p id=\"<?php echo \$view->escape(\$id); ?>_help\" <?php echo ' '.\$view['form']->block(\$form, 'attributes', ['attr' => \$help_attr]); ?>><?php echo \$help; ?></p>
 <?php endif; ?>
-", "@Framework/Form/form_help.html.php", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form_help.html.php");
+", "@Framework/Form/form_help.html.php", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form_help.html.php");
     }
 }

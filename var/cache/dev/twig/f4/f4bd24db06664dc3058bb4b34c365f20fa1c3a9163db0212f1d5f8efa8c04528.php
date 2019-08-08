@@ -266,6 +266,6 @@ class __TwigTemplate_9c6430a73d31e5080eaf3da781781be3e2284820c9fff88b33aef2c4ca4
         {{- form_rest(form) -}}
     </table>
 {%- endblock form_widget_compound -%}
-", "form_table_layout.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
+", "form_table_layout.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bridge/Resources/views/Form/form_table_layout.html.twig");
     }
 }

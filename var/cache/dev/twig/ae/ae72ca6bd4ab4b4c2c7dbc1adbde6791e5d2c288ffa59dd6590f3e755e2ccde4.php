@@ -75,6 +75,6 @@ class __TwigTemplate_b923b8b2923540d041f42d384fa018adb9fcb168b756bc28bb9e3e1853b
         return new Source("{% set type = field_options.type_options.type|default('fractional') %}
 {% set scale = field_options.type_options.scale|default(0) %}
 {{ (type == 'fractional' ? value * 100 : value)|number_format(scale) }}%
-", "@EasyAdmin/default/field_percent.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_percent.html.twig");
+", "@EasyAdmin/default/field_percent.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_percent.html.twig");
     }
 }

@@ -79,6 +79,6 @@ class __TwigTemplate_1d0c62bda19650e0ca8031179c30ef6f5e6abeb5154e1285b19f305a327
 {{ status_code }} {{ status_text }}
 
 */
-", "@Twig/Exception/error.js.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.js.twig");
+", "@Twig/Exception/error.js.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.js.twig");
     }
 }

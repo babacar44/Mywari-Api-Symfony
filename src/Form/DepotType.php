@@ -3,8 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Depot;
+use App\Entity\Compte;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DepotType extends AbstractType
@@ -13,9 +15,10 @@ class DepotType extends AbstractType
     {
         $builder
             ->add('montant')
-            ->add('dateDepot')
             ->add('Caissier')
-            ->add('depot')
+            ->add('depot',EntityType::class,[
+                'class' => Compte::class,
+                ])
         ;
     }
 
@@ -23,6 +26,8 @@ class DepotType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Depot::class,
+            'csrf_protection'=>false
+
         ]);
     }
 }

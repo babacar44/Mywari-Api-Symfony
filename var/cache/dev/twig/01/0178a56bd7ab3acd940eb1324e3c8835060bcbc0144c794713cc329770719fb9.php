@@ -105,6 +105,6 @@ class __TwigTemplate_f0171c3658a63f8eacc22a4e383cf5d0e880f74c6d1c22f9e4bcd1fdfb9
         <img src=\"{{ asset(value) }}\">
     </div>
 {% endif %}
-", "@EasyAdmin/default/field_image.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_image.html.twig");
+", "@EasyAdmin/default/field_image.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_image.html.twig");
     }
 }

@@ -108,6 +108,6 @@ class __TwigTemplate_0b896aa0b007dd6afa80aff70efcf4f8cacb65d4ae65b480a7a4c0cc3cd
     </exception>
 {% endfor %}
 </error>
-", "@Twig/Exception/exception.xml.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/exception.xml.twig");
+", "@Twig/Exception/exception.xml.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/exception.xml.twig");
     }
 }

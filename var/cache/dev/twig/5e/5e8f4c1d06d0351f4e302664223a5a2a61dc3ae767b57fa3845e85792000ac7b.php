@@ -482,6 +482,6 @@ class __TwigTemplate_14cf0be18774d2bd1602f55973759b214c254f103bd57000ab67a6e7690
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
     }
 }

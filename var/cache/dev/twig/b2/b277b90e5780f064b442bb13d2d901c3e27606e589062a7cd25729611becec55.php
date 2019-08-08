@@ -375,6 +375,6 @@ class __TwigTemplate_3d8aa2202357875b4243c1c06afdbefa3fc1e3989ac1e1c9f76006a2ef1
 
 </body>
 </html>
-", "@ApiPlatform/SwaggerUi/index.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
+", "@ApiPlatform/SwaggerUi/index.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/SwaggerUi/index.html.twig");
     }
 }

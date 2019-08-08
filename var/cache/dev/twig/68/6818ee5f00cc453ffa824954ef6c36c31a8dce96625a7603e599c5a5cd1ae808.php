@@ -144,6 +144,6 @@ class __TwigTemplate_8d8106f5e3024d6792f01432a0fd6b6372af99f0f3e13631e3fc4c12e24
         </ul>
     </nav>
 </div>
-", "@EasyAdmin/default/paginator.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/paginator.html.twig");
+", "@EasyAdmin/default/paginator.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/paginator.html.twig");
     }
 }

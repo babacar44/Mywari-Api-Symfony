@@ -204,6 +204,6 @@ class __TwigTemplate_2ac4f431a441376bab0b1ec6a0ace65fcd0d6ee1c4a8cc04d3aa3422fec
         })|raw }}
     </div>
 {% endif %}
-", "@Twig/Exception/trace.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/trace.html.twig");
+", "@Twig/Exception/trace.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/trace.html.twig");
     }
 }

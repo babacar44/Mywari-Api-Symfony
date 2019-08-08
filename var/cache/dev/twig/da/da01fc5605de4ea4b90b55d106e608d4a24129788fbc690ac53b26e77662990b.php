@@ -74,6 +74,6 @@ class __TwigTemplate_c2e3868b9c21e34681776f35030ea05fc906dd21b3d7be452390e52cf86
     public function getSourceContext()
     {
         return new Source("<time datetime=\"{{ value|date('c') }}\" title=\"{{ value|date('r') }}\">{{ value|date(field_options.format) }}</time>
-", "@EasyAdmin/default/field_datetime.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_datetime.html.twig");
+", "@EasyAdmin/default/field_datetime.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_datetime.html.twig");
     }
 }

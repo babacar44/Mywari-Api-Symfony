@@ -95,6 +95,6 @@ class __TwigTemplate_228fa6600dd8e880c86c29eccbd1bbc2d330b35a03a740cda6fa9c033f2
             </trace>
 {% endfor %}
         </traces>
-", "@Twig/Exception/traces.xml.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/traces.xml.twig");
+", "@Twig/Exception/traces.xml.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/traces.xml.twig");
     }
 }

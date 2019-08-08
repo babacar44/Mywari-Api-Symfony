@@ -70,6 +70,6 @@ class __TwigTemplate_aa27882e6059023171c6191a15e50b028f10fdbd94e51ee5bbaf6af368b
     {
         return new Source("{# this field template is used to avoid formatting the special ID attribute as a number #}
 {{ value }}
-", "@EasyAdmin/default/field_id.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_id.html.twig");
+", "@EasyAdmin/default/field_id.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_id.html.twig");
     }
 }

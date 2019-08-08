@@ -129,6 +129,6 @@ $context["action"], "action_href" =>             // line 12
         trans_parameters: trans_parameters,
     }, with_context = false) }}
 {% endfor %}
-", "@EasyAdmin/default/includes/_actions.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/includes/_actions.html.twig");
+", "@EasyAdmin/default/includes/_actions.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/includes/_actions.html.twig");
     }
 }

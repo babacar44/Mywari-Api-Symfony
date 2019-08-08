@@ -70,6 +70,6 @@ class __TwigTemplate_009813a4fa00b141647edc90861bf6f2b58c396a871fc30a35039cca455
     public function getSourceContext()
     {
         return new Source("<time>{{ value|date(field_options.format) }}</time>
-", "@EasyAdmin/default/field_time.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_time.html.twig");
+", "@EasyAdmin/default/field_time.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_time.html.twig");
     }
 }

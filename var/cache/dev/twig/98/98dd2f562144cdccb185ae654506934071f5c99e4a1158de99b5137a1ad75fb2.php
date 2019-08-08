@@ -67,6 +67,6 @@ class __TwigTemplate_93ff557a1400c9421467582dca0be5a96ac2474dcbeb0df4c312d1fdc08
         return new Source("<?php echo \$view['form']->start(\$form) ?>
     <?php echo \$view['form']->widget(\$form) ?>
 <?php echo \$view['form']->end(\$form) ?>
-", "@Framework/Form/form.html.php", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form.html.php");
+", "@Framework/Form/form.html.php", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form.html.php");
     }
 }

@@ -47,7 +47,7 @@ class __TwigTemplate_8e70954b1ff6c8ddf86c7ef8c185350fabd70cf362c35bac62df32b5d0e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@EasyAdmin/page/login.html.twig"));
 
         // line 1
-        $context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"] = $this->extensions['EasyCorp\Bundle\EasyAdminBundle\Twig\EasyAdminTwigExtension']->getBackendConfiguration("translation_domain");
+        $context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"] = $this->extensions['EasyCorp\Bundle\EasyAdminBundle\Twig\EasyAdminTwigExtension']->getBackendConfiguration("translation_domain");
         // line 2
         $this->getParent($context)->display($context, array_merge($this->blocks, $blocks));
         
@@ -90,15 +90,15 @@ class __TwigTemplate_8e70954b1ff6c8ddf86c7ef8c185350fabd70cf362c35bac62df32b5d0e
         // line 7
         echo "    ";
         $context["_username_label"] = (((isset($context["username_label"]) || array_key_exists("username_label", $context))) ? ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans((isset($context["username_label"]) || array_key_exists("username_label", $context) ? $context["username_label"] : (function () { throw new RuntimeError('Variable "username_label" does not exist.', 7, $this->source); })()), [],         // line 1
-(isset($context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"]) || array_key_exists("__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a", $context) ? $context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"] : (function () { throw new RuntimeError('Variable "__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.username", [], "EasyAdminBundle")));
+(isset($context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"]) || array_key_exists("__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc", $context) ? $context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"] : (function () { throw new RuntimeError('Variable "__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.username", [], "EasyAdminBundle")));
         // line 8
         echo "    ";
         $context["_password_label"] = (((isset($context["password_label"]) || array_key_exists("password_label", $context))) ? ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans((isset($context["password_label"]) || array_key_exists("password_label", $context) ? $context["password_label"] : (function () { throw new RuntimeError('Variable "password_label" does not exist.', 8, $this->source); })()), [],         // line 1
-(isset($context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"]) || array_key_exists("__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a", $context) ? $context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"] : (function () { throw new RuntimeError('Variable "__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.password", [], "EasyAdminBundle")));
+(isset($context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"]) || array_key_exists("__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc", $context) ? $context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"] : (function () { throw new RuntimeError('Variable "__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.password", [], "EasyAdminBundle")));
         // line 9
         echo "    ";
         $context["_sign_in_label"] = (((isset($context["sign_in_label"]) || array_key_exists("sign_in_label", $context))) ? ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans((isset($context["sign_in_label"]) || array_key_exists("sign_in_label", $context) ? $context["sign_in_label"] : (function () { throw new RuntimeError('Variable "sign_in_label" does not exist.', 9, $this->source); })()), [],         // line 1
-(isset($context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"]) || array_key_exists("__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a", $context) ? $context["__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a"] : (function () { throw new RuntimeError('Variable "__internal_bb127914479f128766e80468157cc0550771dba0fc6a23eab7abd9eebe2ec93a" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.sign_in", [], "EasyAdminBundle")));
+(isset($context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"]) || array_key_exists("__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc", $context) ? $context["__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc"] : (function () { throw new RuntimeError('Variable "__internal_54eac14acd2dd0209d0c15ac2c12ab3e14a951ecb028d159ea030fccf0e126fc" does not exist.', 1, $this->source); })()))) : ($this->extensions['Symfony\Bridge\Twig\Extension\TranslationExtension']->trans("login.sign_in", [], "EasyAdminBundle")));
         // line 10
         echo "
     <div class=\"login-wrapper\">
@@ -307,6 +307,6 @@ class __TwigTemplate_8e70954b1ff6c8ddf86c7ef8c185350fabd70cf362c35bac62df32b5d0e
         </section>
     </div>
 {% endblock %}
-", "@EasyAdmin/page/login.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/page/login.html.twig");
+", "@EasyAdmin/page/login.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/page/login.html.twig");
     }
 }

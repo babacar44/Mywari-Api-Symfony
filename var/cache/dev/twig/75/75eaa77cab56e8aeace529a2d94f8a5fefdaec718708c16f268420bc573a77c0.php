@@ -172,6 +172,6 @@ class __TwigTemplate_352a3520f349be6e558e87a295aba6a78fa1563e0ee642eea4008c956d4
         {{ exception.publicMessage|trans(exception.translationParameters, 'EasyAdminBundle') }}
     </div>
 {% endblock %}
-", "@EasyAdmin/default/exception.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/exception.html.twig");
+", "@EasyAdmin/default/exception.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/exception.html.twig");
     }
 }

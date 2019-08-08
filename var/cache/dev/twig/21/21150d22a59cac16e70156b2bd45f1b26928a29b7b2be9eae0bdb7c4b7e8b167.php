@@ -200,6 +200,6 @@ class __TwigTemplate_a274653a015f57955eecc6d364ec55b3f3d5acc3c3423724fc02bfe152e
 {% else %}
     {{ value|easyadmin_truncate }}
 {% endif %}
-", "@EasyAdmin/default/field_association.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_association.html.twig");
+", "@EasyAdmin/default/field_association.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_association.html.twig");
     }
 }

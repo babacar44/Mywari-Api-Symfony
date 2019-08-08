@@ -125,6 +125,6 @@ class __TwigTemplate_dd279d18a51c5a89c9506be3680e5825024abd9107f847ec475380b434c
         </div>
     </body>
 </html>
-", "@Twig/Exception/error.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.html.twig");
+", "@Twig/Exception/error.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/error.html.twig");
     }
 }

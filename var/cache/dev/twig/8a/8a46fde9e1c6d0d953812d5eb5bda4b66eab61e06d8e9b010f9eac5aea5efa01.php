@@ -81,6 +81,6 @@ class __TwigTemplate_74efd1ad0afd47b65984f6dfc863b7e2e3addada61ae2392b58691af21b
 <span class=\"badge badge-danger\" title=\"{{ 'label.inaccessible.explanation'|trans }}\">
     {{ 'label.inaccessible'|trans }}
 </span>
-", "@EasyAdmin/default/label_inaccessible.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/label_inaccessible.html.twig");
+", "@EasyAdmin/default/label_inaccessible.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/label_inaccessible.html.twig");
     }
 }

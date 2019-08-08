@@ -61,6 +61,6 @@ class __TwigTemplate_9521a8bd1a2e28c12080beba90f9a0e026a3dbc24a69339b2acdb17cb13
     {
         return new Source("{# this template is rendered when an error or exception occurs while
    trying to get the value of the field (by default nothing is displayed) #}
-", "@EasyAdmin/default/label_undefined.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/label_undefined.html.twig");
+", "@EasyAdmin/default/label_undefined.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/label_undefined.html.twig");
     }
 }

@@ -63,6 +63,6 @@ class __TwigTemplate_75048c24948a5a3a43fcaef1984032a5f375d63112cc33de120aea55093
     public function getSourceContext()
     {
         return new Source("<?php if (\$form->vars['multipart']): ?>enctype=\"multipart/form-data\"<?php endif ?>
-", "@Framework/Form/form_enctype.html.php", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form_enctype.html.php");
+", "@Framework/Form/form_enctype.html.php", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/views/Form/form_enctype.html.php");
     }
 }

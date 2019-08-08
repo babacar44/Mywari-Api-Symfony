@@ -130,6 +130,6 @@ class __TwigTemplate_2ab3fd820f6ee1788faed3aff89259704045ba7e79906a53150cc5ab1d3
 
 </body>
 </html>
-", "@ApiPlatform/Graphiql/index.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
+", "@ApiPlatform/Graphiql/index.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views/Graphiql/index.html.twig");
     }
 }

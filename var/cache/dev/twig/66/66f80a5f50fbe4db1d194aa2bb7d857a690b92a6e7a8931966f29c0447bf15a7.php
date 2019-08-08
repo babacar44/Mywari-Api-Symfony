@@ -1199,6 +1199,6 @@ class __TwigTemplate_b7926e85233721903dcf1317ce0dabc622ea681c922c8bc880875f30131
     </body>
     {% endblock body %}
 </html>
-", "@EasyAdmin/default/layout.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/layout.html.twig");
+", "@EasyAdmin/default/layout.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/layout.html.twig");
     }
 }

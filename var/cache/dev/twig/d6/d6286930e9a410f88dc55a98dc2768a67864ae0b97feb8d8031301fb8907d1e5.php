@@ -88,6 +88,6 @@ class __TwigTemplate_8935ef400eebc8e24e4e69c4acf9c3a9675329e3a966ca225e67a8d6895
 {% else %}
     <span class=\"badge badge-danger\">{{ 'label.false'|trans }}</span>
 {% endif %}
-", "@EasyAdmin/default/field_boolean.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_boolean.html.twig");
+", "@EasyAdmin/default/field_boolean.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/field_boolean.html.twig");
     }
 }

@@ -154,6 +154,6 @@ class __TwigTemplate_13896d6d55914717b9287012474e8b27958f7db41dee5425ff6b77760a2
     </ul>
 </div>
 {% endblock %}
-", "user/index.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/templates/user/index.html.twig");
+", "user/index.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/templates/user/index.html.twig");
     }
 }

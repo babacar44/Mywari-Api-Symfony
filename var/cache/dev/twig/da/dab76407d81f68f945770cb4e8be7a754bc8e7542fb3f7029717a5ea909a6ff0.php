@@ -212,6 +212,6 @@ class __TwigTemplate_41804ab9ef6aa2c950b7cb5593ed0931fa833a889d2caf29a6a44182041
     {% endfor %}
     </tbody>
 </table>
-", "@Twig/Exception/logs.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/logs.html.twig");
+", "@Twig/Exception/logs.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/logs.html.twig");
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Compte;
+use App\Form\CompteType;
 use App\Entity\Partenaire;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Serializer\Serializer;
@@ -26,8 +27,14 @@ class CompteController extends AbstractController
      */
     public function creer(Request $request, EntityManagerInterface $entityManager)
     {
-        $value = json_decode($request->getContent());
+        // $value = json_decode($request->getContent());
         $newcompte = new Compte();
+        $form = $this->createForm(CompteType::class, $newcompte);
+        $form->handleRequest($request);
+        //$data=json_decode($request->getContent(),true);
+        $data=$request->request->all();
+        $form->submit($data);
+    
         $sol=0;
         $random1 = random_int(101, 999);
         $random11 = random_int(101, 999);
@@ -39,11 +46,12 @@ class CompteController extends AbstractController
         $newcompte->setNumCompte($random);
         $newcompte->setSolde($sol);
 
-        $searchid =$this->getDoctrine()->getRepository(Partenaire::class)->findByNinea($value->ninea);
+        // $searchid =$this->getDoctrine()->getRepository(Partenaire::class)->findByNinea($value->ninea);
 
         // var_dump($searchid);die();
-
-        $newcompte->setPartenaire($searchid[0]);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+        // $newcompte->setPartenaire($searchid[0]);
 
         $entityManager->persist($newcompte);
         $entityManager->flush();
@@ -55,6 +63,12 @@ class CompteController extends AbstractController
         
         return new JsonResponse($data, 201);
     
+    }
+    $data = [
+        'status' => 500,
+        'message' => 'Echec Création Réesaayer !'
+    ];
+    return new JsonResponse($data, 500);
 
     }
 }

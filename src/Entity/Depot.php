@@ -38,7 +38,7 @@ class Depot
      * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="depots")
      */
     private $depot;
-
+//compte
     public function getId(): ?int
     {
         return $this->id;
@@ -79,7 +79,7 @@ class Depot
 
         return $this;
     }
-
+//getCompte
     public function getDepot(): ?Compte
     {
         return $this->depot;

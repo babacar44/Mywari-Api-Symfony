@@ -497,6 +497,6 @@ class __TwigTemplate_3cab288d9e55e1c71240a8efdfa4c3e081f1a9be8deafa01eb3334c20c8
 </ul>
 
 {% block main_menu_after %}{% endblock %}
-", "@EasyAdmin/default/menu.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/menu.html.twig");
+", "@EasyAdmin/default/menu.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views/default/menu.html.twig");
     }
 }

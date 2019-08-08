@@ -171,6 +171,6 @@ class __TwigTemplate_092a3f0cdfcdd1be604e6900d6e5278da73031afe60d7080ab38a10b8a5
         {%- endfor -%}
     </pre>
 {% endif %}
-", "@Doctrine/Collector/explain.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
+", "@Doctrine/Collector/explain.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/doctrine/doctrine-bundle/Resources/views/Collector/explain.html.twig");
     }
 }

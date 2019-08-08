@@ -11,8 +11,7 @@ class PartenaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('ninea')
+        $builder    
             ->add('raisonSociale')
             ->add('nomComplet')
             ->add('telephone')
@@ -25,6 +24,8 @@ class PartenaireType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Partenaire::class,
+            'csrf_protection'=>false
+
         ]);
     }
 }

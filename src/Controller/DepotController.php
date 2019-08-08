@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Depot;
 use App\Entity\Compte;
+use App\Form\DepotType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,19 +29,13 @@ class DepotController extends AbstractController
     public function deposer(Request $request, EntityManagerInterface $entityManager,SerializerInterface $serializer, ValidatorInterface $validator)
     {
 
-        $values = json_decode($request->getContent());
-            $depot = new Depot();
-
-                $depot->setMontant($values->montant);
-                $depot->setDateDepot(new \DateTime());
-                $depot->setCaissier($values->caissier);
-                    $searchId =$this->getDoctrine()->getRepository(Compte::class)->findByNumCompte($values->numCompte);
-
-                    $searchId[0]->setSolde($searchId[0]->getSolde() + $values->montant);
-
-            $depot->setDepot($searchId[0]);
+        $depot = new Depot();
+        $form=$this->createForm(DepotType::class,$depot);
+        $data=json_decode($request->getContent(),true);
+        $form->submit($data);
 
             $errors = $validator->validate($depot);
+
 
         if(count($errors)) {
             $errors = $serializer->serialize($errors, 'json');
@@ -48,15 +43,33 @@ class DepotController extends AbstractController
                 'Content-Type' => 'application/json'
             ]);
         }
+        if($form->isSubmitted() && $form->isValid()){
+        $depot->setDateDepot(new \DateTime());
+
+
+
+        $entityManager=$this->getDoctrine()->getManager();
         $entityManager->persist($depot);
+        $entityManager->flush();
+        
+        $newcompte = $depot->getDepot();
+        $valeur = $newcompte->getSolde()+ $depot->getMontant();
+        $newcompte->setSolde($valeur);
+        $entityManager->persist($newcompte);
         $entityManager->flush();
 
         $data = [
             'status' => 201,
-            'message' => 'Dépot de '  .$values->montant. ' validé'
+            'message' => 'Dépot de '.$depot->getMontant().' validé'
         ];
         
         return new JsonResponse($data, 201);
-
+    }
+    $data = [
+        'status' => 400,
+        'message' => 'Dépot pas ok'
+    ];
+    
+    return new JsonResponse($data, 400);
     }
 }

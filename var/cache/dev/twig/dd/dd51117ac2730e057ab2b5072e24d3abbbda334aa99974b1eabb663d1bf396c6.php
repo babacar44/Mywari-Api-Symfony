@@ -1828,6 +1828,6 @@ class __TwigTemplate_6e5b037a8b26ded3163140a798cf6fb8411728f8257910f1585b0572602
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

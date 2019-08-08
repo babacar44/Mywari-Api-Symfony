@@ -490,6 +490,6 @@ class __TwigTemplate_fb9eae29731e4866a3f7b858abe87a385104bce653347604c933e274fbe
         {% endif %}
     </div>
 </div>
-", "@Twig/Exception/exception.html.twig", "/home/babacar/SA DUTY/Profil Rouge/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/exception.html.twig");
+", "@Twig/Exception/exception.html.twig", "/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/twig-bundle/Resources/views/Exception/exception.html.twig");
     }
 }
