@@ -25,6 +25,7 @@
       <parameter key="LexikJWTAuthenticationBundle">Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle</parameter>
       <parameter key="EasyAdminBundle">EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle</parameter>
       <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
+      <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -91,6 +92,10 @@
         <parameter key="path">/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/doctrine/doctrine-fixtures-bundle</parameter>
         <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
       </parameter>
+      <parameter key="VichUploaderBundle" type="collection">
+        <parameter key="path">/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle</parameter>
+        <parameter key="namespace">Vich\UploaderBundle</parameter>
+      </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">srcApp_KernelDevDebugContainer</parameter>
@@ -138,6 +143,7 @@
     <parameter key="serializer.mapping.cache.prefix"></parameter>
     <parameter key="twig.exception_listener.controller">twig.controller.exception::showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
+      <parameter>@VichUploader/Form/fields.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
     </parameter>
     <parameter key="twig.default_path">/home/babacar/SA DUTY/Mywari-Api-Symfony/templates</parameter>
@@ -360,6 +366,7 @@
     <parameter key="api_platform.http_cache.public">null</parameter>
     <parameter key="api_platform.resource_class_directories" type="collection">
       <parameter>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Entity</parameter>
+      <parameter>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Entity</parameter>
     </parameter>
     <parameter key="api_platform.oauth.enabled">false</parameter>
     <parameter key="api_platform.oauth.clientId"></parameter>
@@ -462,6 +469,26 @@
         <parameter key="max_results">10</parameter>
       </parameter>
     </parameter>
+    <parameter key="vich_uploader.default_filename_attribute_suffix">_name</parameter>
+    <parameter key="vich_uploader.mappings" type="collection">
+      <parameter key="images" type="collection">
+        <parameter key="uri_prefix">/images</parameter>
+        <parameter key="upload_destination">/home/babacar/SA DUTY/Mywari-Api-Symfony/public/images</parameter>
+        <parameter key="namer" type="collection">
+          <parameter key="service">Vich\UploaderBundle\Naming\UniqidNamer.images</parameter>
+          <parameter key="options" type="collection"/>
+        </parameter>
+        <parameter key="directory_namer" type="collection">
+          <parameter key="service">null</parameter>
+          <parameter key="options">null</parameter>
+        </parameter>
+        <parameter key="delete_on_remove">true</parameter>
+        <parameter key="delete_on_update">true</parameter>
+        <parameter key="inject_on_load">false</parameter>
+        <parameter key="db_driver">orm</parameter>
+      </parameter>
+    </parameter>
+    <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -530,6 +557,10 @@
       <parameter key="easyadmin.data_collector" type="collection">
         <parameter>easyadmin</parameter>
         <parameter>@EasyAdmin/data_collector/easyadmin.html.twig</parameter>
+      </parameter>
+      <parameter key="Vich\UploaderBundle\DataCollector\MappingCollector" type="collection">
+        <parameter>vich_uploader.mapping_collector</parameter>
+        <parameter>@VichUploader/Collector/mapping_collector.html.twig</parameter>
       </parameter>
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -615,6 +646,7 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Utils\CircularReferenceHandler" class="App\Utils\CircularReferenceHandler" autowire="true" autoconfigure="true"/>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -959,6 +991,7 @@
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type</argument>
+        <argument>Vich\UploaderBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
         <argument>App\Form\CompteType</argument>
@@ -976,6 +1009,8 @@
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminDividerType</argument>
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminSectionType</argument>
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminGroupType</argument>
+        <argument>Vich\UploaderBundle\Form\Type\VichFileType</argument>
+        <argument>Vich\UploaderBundle\Form\Type\VichImageType</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -1252,7 +1287,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.tbg1BZT"/>
+      <argument type="service" id=".service_locator.Jjbppz7"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1499,6 +1534,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.ar.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.ar.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.ar.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.ar.yml</argument>
           </argument>
           <argument key="az" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.az.xlf</argument>
@@ -1516,6 +1552,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.bg.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.bg.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.bg.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.bg.yml</argument>
           </argument>
           <argument key="ca" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.ca.xlf</argument>
@@ -1523,6 +1560,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.ca.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.ca.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.ca.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.ca.yml</argument>
           </argument>
           <argument key="cs" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.cs.xlf</argument>
@@ -1530,6 +1568,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.cs.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.cs.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.cs.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.cs.yml</argument>
           </argument>
           <argument key="cy" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.cy.xlf</argument>
@@ -1547,6 +1586,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.de.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.de.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.de.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.de.yml</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.el.xlf</argument>
@@ -1561,6 +1601,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.en.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.en.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.en.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.en.yml</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.es.xlf</argument>
@@ -1568,6 +1609,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.es.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.es.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.es.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.es.yml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.et.xlf</argument>
@@ -1592,6 +1634,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/form/Resources/translations/validators.fi.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.fi.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.fi.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.fi.yml</argument>
           </argument>
           <argument key="fr" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.fr.xlf</argument>
@@ -1599,6 +1642,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.fr.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.fr.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.fr.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.fr.yml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.gl.xlf</argument>
@@ -1625,6 +1669,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.hu.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.hu.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.hu.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.hu.yml</argument>
           </argument>
           <argument key="hy" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.hy.xlf</argument>
@@ -1641,6 +1686,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.it.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.it.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.it.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.it.yml</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.ja.xlf</argument>
@@ -1658,6 +1704,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.lt.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.lt.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.lt.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.lt.yml</argument>
           </argument>
           <argument key="lv" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.lv.xlf</argument>
@@ -1696,12 +1743,14 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.pl.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.pl.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.pl.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.pl.yml</argument>
           </argument>
           <argument key="pt" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.pt.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/form/Resources/translations/validators.pt.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.pt.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.pt.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.pt.yml</argument>
           </argument>
           <argument key="pt_BR" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.pt_BR.xlf</argument>
@@ -1721,6 +1770,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.ru.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.ru.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.ru.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.ru.yml</argument>
           </argument>
           <argument key="sk" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.sk.xlf</argument>
@@ -1733,6 +1783,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.sl.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.sl.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.sl.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.sl.yml</argument>
           </argument>
           <argument key="sq" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.sq.xlf</argument>
@@ -1769,6 +1820,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.tr.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.tr.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.tr.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.tr.yml</argument>
           </argument>
           <argument key="uk" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.uk.xlf</argument>
@@ -1776,6 +1828,7 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations/security.uk.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.uk.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.uk.xlf</argument>
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.uk.yml</argument>
           </argument>
           <argument key="vi" type="collection">
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations/validators.vi.xlf</argument>
@@ -1799,12 +1852,16 @@
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/EasyAdminBundle.sr_RS.xlf</argument>
             <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations/messages.sr_RS.xlf</argument>
           </argument>
+          <argument key="vn" type="collection">
+            <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations/VichUploaderBundle.vn.yml</argument>
+          </argument>
         </argument>
         <argument key="scanned_directories" type="collection">
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/validator/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/form/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/security-core/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/translations</argument>
+          <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/symfony/framework-bundle/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Resources/FrameworkBundle/translations</argument>
@@ -1837,6 +1894,7 @@
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Resources/EasyAdminBundle/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/doctrine/doctrine-fixtures-bundle/Resources/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Resources/DoctrineFixturesBundle/translations</argument>
+          <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Resources/VichUploaderBundle/translations</argument>
           <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Resources/translations</argument>
         </argument>
       </argument>
@@ -2098,6 +2156,9 @@
       </call>
       <call method="add">
         <argument type="service" id="easyadmin.data_collector"/>
+      </call>
+      <call method="add">
+        <argument type="service" id="Vich\UploaderBundle\DataCollector\MappingCollector"/>
       </call>
       <call method="add">
         <argument type="service" id="data_collector.config"/>
@@ -3063,7 +3124,9 @@
       <argument type="service" id="property_info" on-invalid="ignore"/>
       <argument type="service" id="serializer.mapping.class_discriminator_resolver" on-invalid="ignore"/>
       <argument>null</argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="circular_reference_handler" type="service" id="App\Utils\CircularReferenceHandler"/>
+      </argument>
     </service>
     <service id="serializer.denormalizer.array" class="Symfony\Component\Serializer\Normalizer\ArrayDenormalizer" public="false">
       <tag name="serializer.normalizer" priority="-990"/>
@@ -3240,6 +3303,9 @@
       <call method="addExtension">
         <argument type="service" id="easyadmin.twig.extension"/>
       </call>
+      <call method="addExtension">
+        <argument type="service" id="vich_uploader.twig.extension.uploader"/>
+      </call>
       <call method="addGlobal">
         <argument>app</argument>
         <argument type="service" id="twig.app_variable"/>
@@ -3345,6 +3411,14 @@
       <call method="addPath">
         <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/easycorp/easyadmin-bundle/src/Resources/views</argument>
         <argument>!EasyAdmin</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/views</argument>
+        <argument>VichUploader</argument>
+      </call>
+      <call method="addPath">
+        <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Resources/views</argument>
+        <argument>!VichUploader</argument>
       </call>
       <call method="addPath">
         <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/templates</argument>
@@ -4343,6 +4417,15 @@
     </service>
     <service id="doctrine.dbal.default_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager" public="false">
       <argument type="service" id=".service_locator.Otd28_S"/>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.clean.images"/>
+      </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.remove.images"/>
+      </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="vich_uploader.listener.upload.images"/>
+      </call>
       <call method="addEventListener">
         <argument type="collection">
           <argument>loadClassMetadata</argument>
@@ -4516,6 +4599,7 @@
       <call method="setEntityNamespaces">
         <argument type="collection">
           <argument key="App">App\Entity</argument>
+          <argument key="VichUploaderBundle">Vich\UploaderBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -4562,12 +4646,17 @@
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
         <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/src/Entity</argument>
+        <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/vendor/vich/uploader-bundle/Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>App\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>Vich\UploaderBundle\Entity</argument>
       </call>
     </service>
     <service id="doctrine_cache.providers.doctrine.orm.default_metadata_cache" class="Doctrine\Common\Cache\ArrayCache" public="true">
@@ -6131,6 +6220,258 @@
         </argument>
       </call>
     </service>
+    <service id="Vich\UploaderBundle\Naming\UniqidNamer.images" class="Vich\UploaderBundle\Naming\UniqidNamer" public="true"/>
+    <service id="vich_uploader.adapter.propel" class="Vich\UploaderBundle\Adapter\Propel\PropelORMAdapter" public="false"/>
+    <service id="vich_uploader.adapter.mongodb" class="Vich\UploaderBundle\Adapter\ODM\MongoDB\MongoDBAdapter" public="false"/>
+    <service id="vich_uploader.adapter.orm" class="Vich\UploaderBundle\Adapter\ORM\DoctrineORMAdapter" public="false"/>
+    <service id="vich_uploader.adapter.phpcr" class="Vich\UploaderBundle\Adapter\PHPCR\PHPCRAdapter" public="false"/>
+    <service id="vich_uploader.listener.doctrine.base" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.orm" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.orm" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.orm" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.orm" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.mongodb" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.phpcr" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.propel.base" public="false" abstract="true">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.inject.propel" class="Vich\UploaderBundle\EventListener\Propel\InjectListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.propel" class="Vich\UploaderBundle\EventListener\Propel\UploadListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.propel" class="Vich\UploaderBundle\EventListener\Propel\CleanListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.propel" class="Vich\UploaderBundle\EventListener\Propel\RemoveListener" public="false">
+      <argument></argument>
+      <argument></argument>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.storage.file_system" class="Vich\UploaderBundle\Storage\FileSystemStorage" public="false">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+    </service>
+    <service id="vich_uploader.file_injector" class="Vich\UploaderBundle\Injector\FileInjector" public="false">
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="vich_uploader.metadata.file_locator" class="Metadata\Driver\FileLocator" public="false">
+      <argument type="collection"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.annotation" class="Vich\UploaderBundle\Metadata\Driver\AnnotationDriver" public="false">
+      <argument type="service" id="annotations.cached_reader"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.xml" class="Vich\UploaderBundle\Metadata\Driver\XmlDriver" public="false">
+      <argument type="service" id="vich_uploader.metadata.file_locator"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.yaml" class="Vich\UploaderBundle\Metadata\Driver\YamlDriver" public="false">
+      <argument type="service" id="vich_uploader.metadata.file_locator"/>
+    </service>
+    <service id="vich_uploader.metadata_driver.chain" class="Metadata\Driver\DriverChain" public="false">
+      <argument type="collection">
+        <argument type="service" id="vich_uploader.metadata_driver.xml"/>
+        <argument type="service" id="vich_uploader.metadata_driver.annotation"/>
+        <argument type="service" id="vich_uploader.metadata_driver.yaml"/>
+      </argument>
+    </service>
+    <service id="vich_uploader.metadata.cache.file_cache" class="Metadata\Cache\FileCache" public="false">
+      <argument>/home/babacar/SA DUTY/Mywari-Api-Symfony/var/cache/dev/vich_uploader</argument>
+    </service>
+    <service id="vich_uploader.metadata_factory" class="Metadata\MetadataFactory" public="false">
+      <argument type="service" id="vich_uploader.metadata_driver.chain"/>
+      <argument>Metadata\ClassHierarchyMetadata</argument>
+      <argument>true</argument>
+      <call method="setCache">
+        <argument type="service" id="vich_uploader.metadata.cache.file_cache" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="vich_uploader.metadata_reader" class="Vich\UploaderBundle\Metadata\MetadataReader" public="false">
+      <argument type="service" id="vich_uploader.metadata_factory"/>
+    </service>
+    <service id="vich_uploader.property_mapping_factory" class="Vich\UploaderBundle\Mapping\PropertyMappingFactory" public="false">
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument>%vich_uploader.mappings%</argument>
+      <argument>_name</argument>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\UniqidNamer" class="Vich\UploaderBundle\Naming\UniqidNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\PropertyNamer" class="Vich\UploaderBundle\Naming\PropertyNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\OrignameNamer" class="Vich\UploaderBundle\Naming\OrignameNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\HashNamer" class="Vich\UploaderBundle\Naming\HashNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\Base64Namer" class="Vich\UploaderBundle\Naming\Base64Namer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" class="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" class="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" public="true">
+      <argument type="service" id="property_accessor" on-invalid="null"/>
+    </service>
+    <service id="vich_uploader.current_date_time_helper" class="Vich\UploaderBundle\Naming\CurrentDateTimeHelper" public="false"/>
+    <service id="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" class="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" public="true">
+      <argument type="service" id="vich_uploader.current_date_time_helper" on-invalid="null"/>
+      <argument type="service" id="property_accessor" on-invalid="null"/>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\SmartUniqueNamer" class="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true"/>
+    <service id="vich_uploader.download_handler" class="Vich\UploaderBundle\Handler\DownloadHandler" public="true">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="vich_uploader.upload_handler" class="Vich\UploaderBundle\Handler\UploadHandler" public="true">
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.file_injector"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="vich_uploader.command.mapping_debug_class" class="Vich\UploaderBundle\Command\MappingDebugClassCommand" public="false">
+      <tag name="console.command" command="vich:mapping:debug-class"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <call method="setName">
+        <argument>vich:mapping:debug-class</argument>
+      </call>
+    </service>
+    <service id="vich_uploader.command.mapping_debug" class="Vich\UploaderBundle\Command\MappingDebugCommand" public="false">
+      <tag name="console.command" command="vich:mapping:debug"/>
+      <argument>%vich_uploader.mappings%</argument>
+      <call method="setName">
+        <argument>vich:mapping:debug</argument>
+      </call>
+    </service>
+    <service id="vich_uploader.command.mapping_list_classes" class="Vich\UploaderBundle\Command\MappingListClassesCommand" public="false">
+      <tag name="console.command" command="vich:mapping:list-classes"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <call method="setName">
+        <argument>vich:mapping:list-classes</argument>
+      </call>
+    </service>
+    <service id="Vich\UploaderBundle\DataCollector\MappingCollector" class="Vich\UploaderBundle\DataCollector\MappingCollector" public="false">
+      <tag name="data_collector" template="@VichUploader/Collector/mapping_collector.html.twig" id="vich_uploader.mapping_collector"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+    </service>
+    <service id="vich_uploader.form.type.file" class="Vich\UploaderBundle\Form\Type\VichFileType" public="true">
+      <tag name="form.type" alias="vich_file"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="vich_uploader.form.type.image" class="Vich\UploaderBundle\Form\Type\VichImageType" public="true">
+      <tag name="form.type" alias="vich_image"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+      <argument type="service" id="vich_uploader.property_mapping_factory"/>
+      <argument type="service" id="property_accessor"/>
+      <argument>null</argument>
+    </service>
+    <service id="vich_uploader.templating.helper.uploader_helper" class="Vich\UploaderBundle\Templating\Helper\UploaderHelper" public="true">
+      <tag name="templating.helper" alias="vich_uploader"/>
+      <argument type="service" id="vich_uploader.storage.file_system"/>
+    </service>
+    <service id="vich_uploader.twig.extension.uploader" class="Vich\UploaderBundle\Twig\Extension\UploaderExtension" public="false">
+      <tag name="twig.extension"/>
+      <argument type="service" id="vich_uploader.templating.helper.uploader_helper"/>
+    </service>
+    <service id="vich_uploader.listener.clean.images" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="50"/>
+      <argument>images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.images" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="0"/>
+      <argument>images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.images" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener" public="false">
+      <tag name="doctrine.event_subscriber" priority="0"/>
+      <argument>images</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CompteController" class="App\Controller\CompteController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6365,6 +6706,13 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
+    <service id=".service_locator.eIEYWuf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="partenaireRepository" type="service" id="App\Repository\PartenaireRepository"/>
+        <argument key="serializer" type="service" id="serializer"/>
+      </argument>
+    </service>
     <service id=".service_locator.2B8PUum" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6373,16 +6721,18 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.CiSjE8A" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.7QUN9SQ" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CompteController::creer" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController::deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\PartenaireController::createPartenaire" type="service" id=".service_locator.H3qnu8f"/>
+        <argument key="App\Controller\PartenaireController::list" type="service" id=".service_locator.eIEYWuf"/>
         <argument key="App\Controller\UserController::register" type="service" id=".service_locator.2B8PUum"/>
         <argument key="App\Controller\CompteController:creer" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\DepotController:deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\PartenaireController:createPartenaire" type="service" id=".service_locator.H3qnu8f"/>
+        <argument key="App\Controller\PartenaireController:list" type="service" id=".service_locator.eIEYWuf"/>
         <argument key="App\Controller\UserController:register" type="service" id=".service_locator.2B8PUum"/>
       </argument>
     </service>
@@ -6445,7 +6795,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.tbg1BZT" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.Jjbppz7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\CompteType" type="service" id="App\Form\CompteType"/>
@@ -6463,6 +6813,8 @@
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service" id="form.type.file"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service" id="form.type.form"/>
+        <argument key="Vich\UploaderBundle\Form\Type\VichFileType" type="service" id="vich_uploader.form.type.file"/>
+        <argument key="Vich\UploaderBundle\Form\Type\VichImageType" type="service" id="vich_uploader.form.type.image"/>
       </argument>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
@@ -6724,12 +7076,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.CiSjE8A"/>
+      <argument type="service" id=".service_locator.7QUN9SQ"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.CiSjE8A"/>
+      <argument type="service" id=".service_locator.7QUN9SQ"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -6767,7 +7119,7 @@
       <argument type="service" id="api_platform.path_segment_name_generator.underscore"/>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.Sd9nqzR"/>
+      <argument type="service" id=".service_locator.pPUCPN5"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -6819,6 +7171,9 @@
         <argument key="lexik:jwt:check-config">lexik_jwt_authentication.check_config_command</argument>
         <argument key="lexik:jwt:generate-token">lexik_jwt_authentication.generate_token_command</argument>
         <argument key="doctrine:fixtures:load">doctrine.fixtures_load_command</argument>
+        <argument key="vich:mapping:debug-class">vich_uploader.command.mapping_debug_class</argument>
+        <argument key="vich:mapping:debug">vich_uploader.command.mapping_debug</argument>
+        <argument key="vich:mapping:list-classes">vich_uploader.command.mapping_list_classes</argument>
         <argument key="make:auth">maker.auto_command.make_auth</argument>
         <argument key="make:command">maker.auto_command.make_command</argument>
         <argument key="make:controller">maker.auto_command.make_controller</argument>
@@ -6839,7 +7194,7 @@
         <argument key="make:migration">maker.auto_command.make_migration</argument>
       </argument>
     </service>
-    <service id=".service_locator.Sd9nqzR" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.pPUCPN5" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -6906,6 +7261,9 @@
         <argument key="security.command.user_password_encoder" type="service" id="security.command.user_password_encoder"/>
         <argument key="twig.command.debug" type="service" id="twig.command.debug"/>
         <argument key="twig.command.lint" type="service" id="twig.command.lint"/>
+        <argument key="vich_uploader.command.mapping_debug" type="service" id="vich_uploader.command.mapping_debug"/>
+        <argument key="vich_uploader.command.mapping_debug_class" type="service" id="vich_uploader.command.mapping_debug_class"/>
+        <argument key="vich_uploader.command.mapping_list_classes" type="service" id="vich_uploader.command.mapping_list_classes"/>
         <argument key="web_server.command.server_run" type="service" id="web_server.command.server_run"/>
         <argument key="web_server.command.server_start" type="service" id="web_server.command.server_start"/>
         <argument key="web_server.command.server_status" type="service" id="web_server.command.server_status"/>
@@ -7213,7 +7571,28 @@
     <service id="EasyCorp\Bundle\EasyAdminBundle\Search\Paginator" alias="easyadmin.paginator"/>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Search\Autocomplete" alias="easyadmin.autocomplete"/>
     <service id="EasyCorp\Bundle\EasyAdminBundle\Form\Filter\FilterRegistry" alias="easyadmin.filter.registry" public="true"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.CiSjE8A"/>
+    <service id="vich_uploader.storage" alias="vich_uploader.storage.file_system"/>
+    <service id="Vich\UploaderBundle\Storage\StorageInterface" alias="vich_uploader.storage.file_system" public="false"/>
+    <service id="Vich\UploaderBundle\Storage\FileSystemStorage" alias="vich_uploader.storage.file_system" public="false"/>
+    <service id="vich_uploader.metadata_driver" alias="vich_uploader.metadata_driver.chain" public="false"/>
+    <service id="vich_uploader.metadata.cache" alias="vich_uploader.metadata.cache.file_cache" public="false"/>
+    <service id="Vich\UploaderBundle\Mapping\PropertyMappingFactory" alias="vich_uploader.property_mapping_factory" public="false"/>
+    <service id="vich_uploader.namer_uniqid" alias="Vich\UploaderBundle\Naming\UniqidNamer" public="true"/>
+    <service id="vich_uploader.namer_property" alias="Vich\UploaderBundle\Naming\PropertyNamer" public="true"/>
+    <service id="vich_uploader.namer_origname" alias="Vich\UploaderBundle\Naming\OrignameNamer" public="true"/>
+    <service id="vich_uploader.namer_hash" alias="Vich\UploaderBundle\Naming\HashNamer" public="true"/>
+    <service id="vich_uploader.namer_base64" alias="Vich\UploaderBundle\Naming\Base64Namer" public="true"/>
+    <service id="vich_uploader.directory_namer_subdir" alias="Vich\UploaderBundle\Naming\SubdirDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_directory_property" alias="Vich\UploaderBundle\Naming\PropertyDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_directory_current_date_time" alias="Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer" public="true"/>
+    <service id="vich_uploader.namer_smart_unique" alias="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true"/>
+    <service id="Vich\UploaderBundle\Handler\DownloadHandler" alias="vich_uploader.download_handler" public="false"/>
+    <service id="Vich\UploaderBundle\Handler\UploadHandler" alias="vich_uploader.upload_handler" public="false"/>
+    <service id="Vich\UploaderBundle\Form\Type\VichFileType" alias="vich_uploader.form.type.file" public="false"/>
+    <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image" public="false"/>
+    <service id="Vich\UploaderBundle\Templating\Helper\UploaderHelper" alias="vich_uploader.templating.helper.uploader_helper" public="false"/>
+    <service id="Vich\UploaderBundle\Twig\Extension\UploaderExtension" alias="vich_uploader.twig.extension.uploader" public="false"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.7QUN9SQ"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>

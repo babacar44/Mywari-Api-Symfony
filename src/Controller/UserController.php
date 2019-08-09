@@ -34,6 +34,9 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         $data=$request->request->all();
+        $file = $request->files->all()[
+            "imageName"
+        ];
         $form->submit($data);
 //    $email                  = $request->request->get("email");
 //    $password               = $request->request->get("password");
@@ -87,6 +90,8 @@ class UserController extends AbstractController
         if(count($entityErrors) == 0)
         {        if ($form->isSubmitted() ) {
 
+            $user->setImageFile($file);
+
             // Save entity
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -122,19 +127,19 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @IsGranted("ROLE_SUPER_ADMIN")
-     * @Route("/profile", name="api_profile")
-     * 
-     */
-    public function profile()
-    {
-        return $this->json([
-            'user' => $this->getUser()
-        ], 200, [], [
-            'groups' => ['api']
-        ]);
-    }
+    // /**
+    //  * @IsGranted("ROLE_SUPER_ADMIN")
+    //  * @Route("/profile", name="api_profile")
+    //  * 
+    //  */
+    // public function profile()
+    // {
+    //     return $this->json([
+    //         'user' => $this->getUser()
+    //     ], 200, [], [
+    //         'groups' => ['api']
+    //     ]);
+    // }
 
     /**
      * @Route("/", name="api_home")
@@ -143,7 +148,8 @@ class UserController extends AbstractController
     {
     return $this->json(['result' => true]);
     }
- 
+    
+    
 
 
 

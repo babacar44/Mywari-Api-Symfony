@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,13 +14,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
+            // ->add('roles')
             ->add('password')
             ->add('nomComplet')
             ->add('propriete')
             ->add('adresse')
             ->add('telephone')
             ->add('statut')
-          
+            ->add('imageFile', VichFileType::class)  
         ;
     }
 
@@ -28,7 +30,6 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'csrf_protection'=>false
-
         ]);
     }
 }
