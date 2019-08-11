@@ -8,12 +8,16 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 
 
 
@@ -22,6 +26,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends AbstractController
 {
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+    $this->passwordEncoder = $passwordEncoder;
+    }
+
     /**
      * @Route("/inscription", name="admin_register", methods={"POST"})
      * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN_PARTENER')")
@@ -38,20 +50,8 @@ class UserController extends AbstractController
             "imageName"
         ];
         $form->submit($data);
-//    $email                  = $request->request->get("email");
-//    $password               = $request->request->get("password");
-//    $passwordConfirmation   = $request->request->get("password_confirmation");
 
-
-    // $roles = $request->request->get("roles");
-    // $nomcomplet = $request->request->get("nomComplet");
-    // $propriete = $request->request->get("propriete");
-    // $adresse = $request->request->get("adresse");
-    // $telephone = $request->request->get("telephone");
-    // $statut = $request->request->get("statut");
-        // var_dump($data);die();
    $errors = [];
-//    if($data && $password != $passwordConfirmation)
         if ($data && ($request->request->get("password") != $request->request->get("password_confirmation")) )
         
    {
@@ -66,8 +66,7 @@ class UserController extends AbstractController
    if(!$errors)
    {
        $encodedPassword = $passwordEncoder->encodePassword($user, $request->request->get("password"));
-    //    $user->setEmail(trim($email));
-    //    $user->setPassword(trim($encodedPassword));
+  
     $user->setPassword(
         $passwordEncoder->encodePassword(
             $user,
@@ -80,11 +79,7 @@ class UserController extends AbstractController
     else  {
             $user->setRoles($roles);
     } 
-    //    $user->setNomComplet(trim($nomcomplet));
-    //    $user->setPropriete(trim($propriete));
-    //    $user->setAdresse(trim($adresse));
-    //    $user->setTelephone(trim($telephone));
-    //    $user->setStatut(trim($statut));
+
 
        $entityErrors = $validator->validate($user);
         if(count($entityErrors) == 0)
@@ -117,15 +112,46 @@ class UserController extends AbstractController
         ], 400);
         }
 
-    /**
-     * @Route("/login", name="api_login",  methods={"POST"})
-     * 
-     */
-    public  function login(){
-        return $this->json([
-            'result' => 'Login validé'
-        ]);
+   
+        /**
+         * @Route("/login", name="token", methods={"POST"})
+         * @param Request $request
+         * @param JWTEncoderInterface $JWTEncoder
+         * @return JsonResponse
+         * @throws \Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException
+         */
+
+        public function login(Request $request, JWTEncoderInterface $jwtEncoder)
+        {
+
+            $values=json_decode($request->getContent());
+            $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
+                'email' => $values->email,
+            ]);
+
+            if (!$user) {
+                return new JsonResponse(['l\utilisateur n\'existe pas']);
+            }
+
+            $isValid = $this->passwordEncoder->isPasswordValid($user, $values->password);
+
+            if (!$isValid) {
+                return new JsonResponse(['veuillez saisir un mot de pass']);
+            }
+            if ($user->getStatut()=='bloquer') {
+
+                return new JsonResponse(['Veuillez contacter votre administrateur vous etes bloqué']);
+        }
+
+        
+        $token = $jwtEncoder->encode([
+                'email' => $user->getEmail(),
+                'exp' => time() + 3600 // 1 hour expiration
+            ]);
+
+        return new JsonResponse(['token' => $token]);
     }
+
 
     // /**
     //  * @IsGranted("ROLE_SUPER_ADMIN")

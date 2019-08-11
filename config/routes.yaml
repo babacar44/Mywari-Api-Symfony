@@ -1,8 +1,8 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-api_logout:
-    path: /logout
+# api_logout:
+#     path: /logout
 
 api_login_check:
-    path: /api/login
+    path: /api/login_check

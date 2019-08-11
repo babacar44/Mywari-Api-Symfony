@@ -71,11 +71,23 @@ class Partenaire
      */
     private $partenaire;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="partenaire")
+     */
+    private $users;
+
     public function __construct()
     {
-        $this->partenaire = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
+    
+   
     
 
     public function getId(): ?int
@@ -186,4 +198,51 @@ class Partenaire
 
         return $this;
     }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setPartenaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getPartenaire() === $this) {
+                $user->setPartenaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
+   
 }

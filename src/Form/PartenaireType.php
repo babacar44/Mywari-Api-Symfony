@@ -17,6 +17,8 @@ class PartenaireType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('adresse')
+            ->add('statut')
+
         ;
     }
 

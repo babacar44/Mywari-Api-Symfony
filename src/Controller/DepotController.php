@@ -31,7 +31,10 @@ class DepotController extends AbstractController
 
         $depot = new Depot();
         $form=$this->createForm(DepotType::class,$depot);
-        $data=json_decode($request->getContent(),true);
+        // $data=json_decode($request->getContent(),true);
+
+        $data=$request->request->all();
+
         $form->submit($data);
 
             $errors = $validator->validate($depot);

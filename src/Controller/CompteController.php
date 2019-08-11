@@ -46,9 +46,6 @@ class CompteController extends AbstractController
         $newcompte->setNumCompte($random);
         $newcompte->setSolde($sol);
 
-        // $searchid =$this->getDoctrine()->getRepository(Partenaire::class)->findByNinea($value->ninea);
-
-        // var_dump($searchid);die();
     
         if ($form->isSubmitted() && $form->isValid()) {
         // $newcompte->setPartenaire($searchid[0]);
@@ -57,6 +54,7 @@ class CompteController extends AbstractController
         $entityManager->flush();
 
         $data = [
+            'user'  => $newcompte->getId(),
             'status' => 201,
             'message' => 'Compte Crée'
         ];

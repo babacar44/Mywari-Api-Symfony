@@ -36,13 +36,17 @@ class PartenaireController extends AbstractController
         /**
          *
          */
-        // $value = json_decode($request->getContent());
+        //  $value = json_decode($request->getContent());
         $partenaire = new Partenaire();
         $form = $this->createForm(PartenaireType::class, $partenaire);
         $form->handleRequest($request);
-        //$data=json_decode($request->getContent(),true);
+        $data=json_decode($request->getContent(),true);
         $data=$request->request->all();
+
+        // dump($data);die();
         $form->submit($data);
+
+      
         $random1 = random_int(001, 999);
         $random2 = random_int(001, 999);
         $random3 = random_int(151, 999);
@@ -144,5 +148,47 @@ class PartenaireController extends AbstractController
            ]
            );
     }
+
+    /**
+     * @Route("/listerpartenaire/{id}", name="parteanire_update", methods= {"PUT"})
+     * @IsGranted("ROLE_SUPER_ADMIN")
+     */
+    public function update(Request $request, SerializerInterface $serializer, Partenaire $partenaire, ValidatorInterface $validator, EntityManagerInterface $entityManager)
+    {
+        $partenaireUpdate = $entityManager->getRepository(Partenaire::class)->find($partenaire->getId());
+         $data = json_decode($request->getContent());
+
+        if (is_array($data) || is_object($data))
+        {
+        foreach ($data as $key => $value)
+         {
+             if ($key && !empty($value)) {
+            
+                 $name = ucfirst($key);
+                 $setter = 'set'.$name;
+
+                 $partenaireUpdate->$setter($value);
+
+             }   
+         }
+        }
+     $errors = $validator->validate($partenaireUpdate);
+     if (count($errors)) {
+         $errors = $serializer->serialize($errors,'json');
+         return new Response($errors, 500,[
+             'Content_Type'=> 'application/json'
+         ]);
+         }
+         $entityManager->persist($partenaireUpdate);
+         $entityManager->flush();
+         $data = [
+             'status' => 200,
+             'message'=>'Le partenaire a bien été mis à jour'
+
+         ];
+         return new JsonResponse($data);
+    }
+
+
 
 }

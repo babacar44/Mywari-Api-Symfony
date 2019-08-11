@@ -14,3 +14,5 @@ composer require serializer
 php bin/console make:auth
 
 php bin/console doctrine:fixtures:load
+
+php app/console doctrine:schema:update --force
