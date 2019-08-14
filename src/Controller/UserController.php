@@ -41,44 +41,117 @@ class UserController extends AbstractController
      */
     public function register(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
     {
+        /**
+         * on instancie la classe User dans notre controller
+         */
         $user = new User();
 
+            /**
+             * on cree un form et on la binde avec l objet $user
+             */
         $form = $this->createForm(UserType::class, $user);
+
+        /**
+         * handleRequest, $data recuperent toutes les 
+         * donnees envoyé depuis le formulaire
+         * $file recupere les images envoyé 
+         * 
+         */
         $form->handleRequest($request);
         $data=$request->request->all();
         $file = $request->files->all()[
             "imageName"
         ];
+        /**
+         * submit valide les donnees recu par $data
+         */
         $form->submit($data);
 
+        /**
+         * ici on cree un tableau d'erreur pour capter les erreurs et envoye divers message selon l'erreur
+         */
    $errors = [];
+   /**
+    * mot de passe doit = mot de passe de confirmation
+    */
         if ($data && ($request->request->get("password") != $request->request->get("password_confirmation")) )
         
    {
        $errors[] = "Password does not match the password confirmation.";
    }
+
+   /**
+    * mot de passe doit etre superieur ou = à 6
+    */
    if(strlen($request->request->get("password")) < 6)
    {
        $errors[] = "Password should be at least 6 characters.";
    }
 
+    /**
+     * et si c est le superAdmin WARI , il fournit le role ADMIN ou CAIISER
+     */
+    if (($this->get("security.authorization_checker")->isGranted("ROLE_SUPER_ADMIN")))
+    
+    {
+        if ($user->getProfil() == '1') 
+        {
+            $user->setRoles(["ROLE_ADMIN_WARI"]);
+        }
 
+        elseif ($user->getProfil() == '2')
+        {
+            $user->setRoles(["ROLE_CAISSIER"]);
+        }
+
+        else 
+        {
+            $errors[] = "roles n existe pas ";   
+        } 
+    } 
+
+    /**
+     * et si c est le superAdmin Partenaire , il fournit le role ADMIN ou USER
+     */
+
+    if (($this->get("security.authorization_checker")->isGranted("ROLE_ADMIN_PARTENER")))
+
+    {
+        if ($user->getProfil() == '1') 
+        {
+            $user->setRoles(["ROLE_ADMIN"]);
+        }
+
+        elseif ($user->getProfil() == '2')
+        {
+            $user->setRoles(["ROLE_USER"]);
+        }
+
+        else 
+        {
+            $errors[] = "roles n existe pas ";   
+        } 
+    }   
+        
+
+    /**
+     * s'il n'ya pas d erreur  on encode le password
+     */
    if(!$errors)
    {
-       $encodedPassword = $passwordEncoder->encodePassword($user, $request->request->get("password"));
+    //    $encodedPassword = $passwordEncoder->encodePassword($user, $request->request->get("password"));
   
     $user->setPassword(
         $passwordEncoder->encodePassword(
             $user,
             $form->get('password')->getData()
         ));
+
+        /**
+         * si c l superAdmin qui est bien connecté il ne peut inscrire que fournir le role de ROLE_ADMIN_WARI
+         */
     
-    if ($this->get("security.authorization_checker")->isGranted("ROLE_SUPER_ADMIN")) {
-        $user->setRoles(["ROLE_ADMIN_WARI"]);
-    }
-    else  {
-            $user->setRoles($roles);
-    } 
+    
 
 
        $entityErrors = $validator->validate($user);
@@ -92,7 +165,6 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
                 return $this->json([
-                    'user' => $user,
                     'status' => 200,
                 'message' => 'L\' Utilisateur a été créé'
             

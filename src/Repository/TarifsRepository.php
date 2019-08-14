@@ -47,4 +47,26 @@ class TarifsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param $Montant
+     * @return Tarifs[]
+     */
+    public function findAllGreaterThanTarifs($Montant): array
+    {
+        // automatically knows to select Products
+        // the "p" is an alias you'll use in the rest of the query
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.borneInferieure <=:Montant')
+            ->andWhere('p.borneSuperieure >=:Montant')
+
+            ->setParameter('Montant', $Montant)
+            ->getQuery();
+
+        return $qb->execute();
+
+        // to get just one result:
+        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
+    }
 }
+

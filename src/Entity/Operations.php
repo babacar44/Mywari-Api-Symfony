@@ -15,7 +15,7 @@ class Operations
      * @ORM\Column(type="integer")
      */
     private $id;
-
+   
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -46,15 +46,70 @@ class Operations
      */
     private $Destinataire;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $CNI;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="operations")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="operations")
+     */
+    private $compte;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cniEnvoyeur;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cniRecepteur;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telEnvoyeur;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $telRecepteur;
+
+   
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etat;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $wari;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $comEnvoi;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $comRetrait;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateRetrait;
+
+   
 
     public function getId(): ?int
     {
@@ -85,12 +140,12 @@ class Operations
         return $this;
     }
 
-    public function getDateEnvoi(): ?string
+    public function getDateEnvoi(): ?\DateTimeInterface
     {
         return $this->dateEnvoi;
     }
 
-    public function setDateEnvoi(string $dateEnvoi): self
+    public function setDateEnvoi(\DateTimeInterface $dateEnvoi): self
     {
         $this->dateEnvoi = $dateEnvoi;
 
@@ -133,17 +188,7 @@ class Operations
         return $this;
     }
 
-    public function getCNI(): ?string
-    {
-        return $this->CNI;
-    }
-
-    public function setCNI(string $CNI): self
-    {
-        $this->CNI = $CNI;
-
-        return $this;
-    }
+   
 
     public function getUser(): ?User
     {
@@ -156,4 +201,138 @@ class Operations
 
         return $this;
     }
+
+    public function getCompte(): ?Compte
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(?Compte $compte): self
+    {
+        $this->compte = $compte;
+
+        return $this;
+    }
+
+    public function getCniEnvoyeur(): ?string
+    {
+        return $this->cniEnvoyeur;
+    }
+
+    public function setCniEnvoyeur(string $cniEnvoyeur): self
+    {
+        $this->cniEnvoyeur = $cniEnvoyeur;
+
+        return $this;
+    }
+
+    public function getCniRecepteur(): ?string
+    {
+        return $this->cniRecepteur;
+    }
+
+    public function setCniRecepteur(string $cniRecepteur): self
+    {
+        $this->cniRecepteur = $cniRecepteur;
+
+        return $this;
+    }
+
+    public function getTelEnvoyeur(): ?string
+    {
+        return $this->telEnvoyeur;
+    }
+
+    public function setTelEnvoyeur(string $telEnvoyeur): self
+    {
+        $this->telEnvoyeur = $telEnvoyeur;
+
+        return $this;
+    }
+
+    public function getTelRecepteur(): ?string
+    {
+        return $this->telRecepteur;
+    }
+
+    public function setTelRecepteur(string $telRecepteur): self
+    {
+        $this->telRecepteur = $telRecepteur;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getWari(): ?int
+    {
+        return $this->wari;
+    }
+
+    public function setWari(int $wari): self
+    {
+        $this->wari = $wari;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getComEnvoi(): ?int
+    {
+        return $this->comEnvoi;
+    }
+
+    public function setComEnvoi(int $comEnvoi): self
+    {
+        $this->comEnvoi = $comEnvoi;
+
+        return $this;
+    }
+
+    public function getComRetrait(): ?int
+    {
+        return $this->comRetrait;
+    }
+
+    public function setComRetrait(int $comRetrait): self
+    {
+        $this->comRetrait = $comRetrait;
+
+        return $this;
+    }
+
+    public function getDateRetrait(): ?\DateTimeInterface
+    {
+        return $this->dateRetrait;
+    }
+
+    public function setDateRetrait(?\DateTimeInterface $dateRetrait): self
+    {
+        $this->dateRetrait = $dateRetrait;
+
+        return $this;
+    }
+
+    
 }

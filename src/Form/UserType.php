@@ -3,10 +3,13 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Partenaire;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Compte;
 
 class UserType extends AbstractType
 {
@@ -21,7 +24,16 @@ class UserType extends AbstractType
             ->add('adresse')
             ->add('telephone')
             ->add('statut')
-            ->add('imageFile', VichFileType::class)  
+            ->add('imageFile', VichFileType::class) 
+            ->add('profil') 
+            ->add('partenaire',EntityType::class,[
+                'class' => Partenaire::class,
+            ])
+            ->add('compte',EntityType::class,[
+                'class' => Compte::class,
+            ])
+            
+
         ;
     }
 

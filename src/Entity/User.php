@@ -113,6 +113,16 @@ class User implements UserInterface
      */
     private $operations;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profil;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="users")
+     */
+    private $compte;
+
     public function __construct()
     {
         $this->operations = new ArrayCollection();
@@ -340,6 +350,30 @@ class User implements UserInterface
                 $operation->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfil(): ?string
+    {
+        return $this->profil;
+    }
+
+    public function setProfil(string $profil): self
+    {
+        $this->profil = $profil;
+
+        return $this;
+    }
+
+    public function getCompte(): ?Compte
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(?Compte $compte): self
+    {
+        $this->compte = $compte;
 
         return $this;
     }

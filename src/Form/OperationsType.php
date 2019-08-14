@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\Compte;
 
 class OperationsType extends AbstractType
 {
@@ -17,12 +18,18 @@ class OperationsType extends AbstractType
             ->add('CodeEnvoi')
             ->add('Envoyeur')
             ->add('Montant')
-            ->add('commission')
             ->add('Destinataire')
-            ->add('CNI')
-            ->add('user', EntityType::class,[
-                'class' => User::class
+        
+            // ->add('user', EntityType::class,[
+            //     'class' => User::class
+            // ])
+            ->add('compte', EntityType::class,[
+                'class' => Compte::class
             ])
+            ->add('cniEnvoyeur')
+            ->add('cniRecepteur')
+            ->add('telEnvoyeur')
+            ->add('telRecepteur')
         ;
     }
 

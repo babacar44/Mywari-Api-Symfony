@@ -17,7 +17,7 @@ return [
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception::cssAction'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
     'creer_compte' => [[], ['_controller' => 'App\\Controller\\CompteController::creer'], [], [['text', '/api/addcompte']], [], []],
     'depot' => [[], ['_controller' => 'App\\Controller\\DepotController::deposer'], [], [['text', '/api/depot']], [], []],
-    'operations' => [[], ['_controller' => 'App\\Controller\\OperationsController::envoi'], [], [['text', '/operations']], [], []],
+    'operation_envoi' => [[], ['_controller' => 'App\\Controller\\OperationsController::operation'], [], [['text', '/api/operation']], [], []],
     'partenaire' => [[], ['_controller' => 'App\\Controller\\PartenaireController::createPartenaire'], [], [['text', '/api/partenaire']], [], []],
     'partenaire_liste' => [[], ['_controller' => 'App\\Controller\\PartenaireController::list'], [], [['text', '/api/listerpartenaire']], [], []],
     'parteanire_update' => [['id'], ['_controller' => 'App\\Controller\\PartenaireController::update'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/listerpartenaire']], [], []],

@@ -15,7 +15,7 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/api/addcompte' => [[['_route' => 'creer_compte', '_controller' => 'App\\Controller\\CompteController::creer'], null, ['POST' => 0], null, false, false, null]],
         '/api/depot' => [[['_route' => 'depot', '_controller' => 'App\\Controller\\DepotController::deposer'], null, null, null, false, false, null]],
-        '/operations' => [[['_route' => 'operations', '_controller' => 'App\\Controller\\OperationsController::envoi'], null, null, null, false, false, null]],
+        '/api/operation' => [[['_route' => 'operation_envoi', '_controller' => 'App\\Controller\\OperationsController::operation'], null, ['POST' => 0], null, false, false, null]],
         '/api/partenaire' => [[['_route' => 'partenaire', '_controller' => 'App\\Controller\\PartenaireController::createPartenaire'], null, ['POST' => 0], null, false, false, null]],
         '/api/listerpartenaire' => [[['_route' => 'partenaire_liste', '_controller' => 'App\\Controller\\PartenaireController::list'], null, ['GET' => 0], null, false, false, null]],
         '/api/inscription' => [[['_route' => 'admin_register', '_controller' => 'App\\Controller\\UserController::register'], null, ['POST' => 0], null, false, false, null]],

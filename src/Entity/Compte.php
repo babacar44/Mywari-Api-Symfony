@@ -46,9 +46,21 @@ class Compte
      */
     private $depots;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="compte")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Operations", mappedBy="compte")
+     */
+    private $operations;
+
     public function __construct()
     {
         $this->depots = new ArrayCollection();
+        $this->users = new ArrayCollection();
+        $this->operations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +129,68 @@ class Compte
             // set the owning side to null (unless already changed)
             if ($depot->getDepot() === $this) {
                 $depot->setDepot(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setCompte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getCompte() === $this) {
+                $user->setCompte(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Operations[]
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operations $operation): self
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations[] = $operation;
+            $operation->setCompte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Operations $operation): self
+    {
+        if ($this->operations->contains($operation)) {
+            $this->operations->removeElement($operation);
+            // set the owning side to null (unless already changed)
+            if ($operation->getCompte() === $this) {
+                $operation->setCompte(null);
             }
         }
 
