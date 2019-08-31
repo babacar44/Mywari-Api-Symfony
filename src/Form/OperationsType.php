@@ -27,7 +27,6 @@ class OperationsType extends AbstractType
                 'class' => Compte::class
             ])
             ->add('cniEnvoyeur')
-            ->add('cniRecepteur')
             ->add('telEnvoyeur')
             ->add('telRecepteur')
         ;

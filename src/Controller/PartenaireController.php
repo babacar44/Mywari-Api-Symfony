@@ -28,8 +28,8 @@ class PartenaireController extends AbstractController
 {
     /**
      * @Route("/partenaire", name="partenaire", methods ={"POST"})
-     * @IsGranted("ROLE_SUPER_ADMIN")
      * 
+     * @IsGranted({"ROLE_SUPER_ADMIN", "ROLE_ADMIN_WARI"}, statusCode=404, message="Vous n'avez pas accces")
      */
     public function createPartenaire(Request $request, EntityManagerInterface $entityManager ,SerializerInterface $serializer,ValidatorInterface $validator, UserPasswordEncoderInterface $passwordEncoder )
     {
@@ -129,11 +129,12 @@ class PartenaireController extends AbstractController
         }
 
 
-        }
+    }
 
         /**
          * @Route("/listerpartenaire", name="partenaire_liste", methods={"GET"})
-         *  @IsGranted("ROLE_SUPER_ADMIN")
+         *
+         * @IsGranted({"ROLE_SUPER_ADMIN", "ROLE_ADMIN_WARI"}, statusCode=404, message="Vous n'avez pas accces")
          */
     public function list(PartenaireRepository $partenaireRepository, SerializerInterface $serializer)
     {
@@ -151,7 +152,7 @@ class PartenaireController extends AbstractController
 
     /**
      * @Route("/listerpartenaire/{id}", name="parteanire_update", methods= {"PUT"})
-     * @IsGranted("ROLE_SUPER_ADMIN")
+     * @IsGranted({"ROLE_SUPER_ADMIN", "ROLE_ADMIN_WARI"}, statusCode=404, message="Vous n'avez pas accces")
      */
     public function update(Request $request, SerializerInterface $serializer, Partenaire $partenaire, ValidatorInterface $validator, EntityManagerInterface $entityManager)
     {

@@ -29,15 +29,16 @@ class Depot
      */
     private $dateDepot;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Caissier;
-
+  
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="depots")
      */
     private $depot;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="depots")
+     */
+    private $caissier;
 //compte
     public function getId(): ?int
     {
@@ -68,17 +69,7 @@ class Depot
         return $this;
     }
 
-    public function getCaissier(): ?string
-    {
-        return $this->Caissier;
-    }
-
-    public function setCaissier(string $Caissier): self
-    {
-        $this->Caissier = $Caissier;
-
-        return $this;
-    }
+   
 //getCompte
     public function getDepot(): ?Compte
     {
@@ -88,6 +79,18 @@ class Depot
     public function setDepot(?Compte $depot): self
     {
         $this->depot = $depot;
+
+        return $this;
+    }
+
+    public function getCaissier(): ?User
+    {
+        return $this->caissier;
+    }
+
+    public function setCaissier(?User $caissier): self
+    {
+        $this->caissier = $caissier;
 
         return $this;
     }

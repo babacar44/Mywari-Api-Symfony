@@ -22,6 +22,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 */
 class User implements UserInterface
 {
+    public function __toString()
+    {
+        return $this->nomComplet;
+    }
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -49,6 +53,12 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+     /**
+     * @var string The hashed password
+     *
+     */
+    private $passwordConfirmation;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -123,9 +133,15 @@ class User implements UserInterface
      */
     private $compte;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Depot", mappedBy="caissier")
+     */
+    private $depots;
+
     public function __construct()
     {
         $this->operations = new ArrayCollection();
+        $this->depots = new ArrayCollection();
     }
 
     
@@ -378,8 +394,64 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Depot[]
+     */
+    public function getDepots(): Collection
+    {
+        return $this->depots;
+    }
+
+    public function addDepot(Depot $depot): self
+    {
+        if (!$this->depots->contains($depot)) {
+            $this->depots[] = $depot;
+            $depot->setCaissier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepot(Depot $depot): self
+    {
+        if ($this->depots->contains($depot)) {
+            $this->depots->removeElement($depot);
+            // set the owning side to null (unless already changed)
+            if ($depot->getCaissier() === $this) {
+                $depot->setCaissier(null);
+            }
+        }
+
+        return $this;
+    }
+
     
 
    
     
+
+
+    /**
+     * Get the hashed password
+     *
+     * @return  string
+     */ 
+    public function getPasswordConfirmation()
+    {
+        return $this->passwordConfirmation;
+    }
+
+    /**
+     * Set the hashed password
+     *
+     * @param  string  $passwordConfirmation  The hashed password
+     *
+     * @return  self
+     */ 
+    public function setPasswordConfirmation(string $passwordConfirmation)
+    {
+        $this->passwordConfirmation = $passwordConfirmation;
+
+        return $this;
+    }
 }

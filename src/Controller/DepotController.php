@@ -45,26 +45,34 @@ class DepotController extends AbstractController
                 'Content-Type' => 'application/json'
             ]);
         }
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() ){
         $depot->setDateDepot(new \DateTime());
+        $numComp=$data['depot'];
         
-        // $searchId =$this->getDoctrine()->getRepository(Compte::class)->findByNumCompte($values->numCompte);
+         $newcompte =$this->getDoctrine()->getRepository(Compte::class)->findOneBy(['numCompte'=>$numComp]);
 
-        //             // $searchId[0]->setSolde($searchId[0]->getSolde() + $values->montant);
-
+         $newcompte->setSolde($newcompte->getSolde() + $depot->getMontant());
+            // dump($this->getUser());
         //     $depot->setDepot($searchId[0]);
-        $depot->setCaissier( $this->getUser());
+        $depot->setCaissier($this->getUser());
 
-
+        $depot->setDepot($newcompte);
+        $valeur=$newcompte->getSolde()+ $depot->getMontant();
+                $newcompte->setSolde($valeur);
+ 
         $entityManager=$this->getDoctrine()->getManager();
+
+        $entityManager->persist($newcompte);
         $entityManager->persist($depot);
         $entityManager->flush();
         
-        $newcompte = $depot->getDepot();
-        $valeur = $newcompte->getSolde()+ $depot->getMontant();
-        $newcompte->setSolde($valeur);
-        $entityManager->persist($newcompte);
-        $entityManager->flush();
+        // $newcompte = $depot->getDepot();
+                   
+
+        // $valeur = $newcompte->getSolde()+ $depot->getMontant();
+        // $newcompte->setSolde($valeur);
+        // $entityManager->persist($newcompte);
+        // $entityManager->flush();
 
         $data = [
             'status' => 201,

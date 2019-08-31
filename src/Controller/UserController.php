@@ -36,7 +36,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/inscription", name="admin_register", methods={"POST"})
-     * @("IsGranted('ROLE_SUPER_ADMIN')" || "IsGranted('ROLE_ADMIN_PARTENER')")
+     *
+     * @IsGranted({"ROLE_SUPER_ADMIN", "ROLE_ADMIN_PARTENER"}, statusCode=404, message="Vous n'avez pas accces")
      * 
      */
     public function register(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
@@ -74,9 +75,9 @@ class UserController extends AbstractController
    /**
     * mot de passe doit = mot de passe de confirmation
     */
-        if ($data && ($request->request->get("password") != $request->request->get("password_confirmation")) )
+        if ($data && ($request->request->get("password") != $request->request->get("passwordConfirmation")) )
         
-   {
+   {    
        $errors[] = "Password does not match the password confirmation.";
    }
 
@@ -208,7 +209,7 @@ class UserController extends AbstractController
             $isValid = $this->passwordEncoder->isPasswordValid($user, $values->password);
 
             if (!$isValid) {
-                return new JsonResponse(['veuillez saisir un mot de pass']);
+                return new JsonResponse(['veuillez saisir un mot de passe']);
             }
             if ($user->getStatut()=='bloquer') {
 
@@ -217,6 +218,7 @@ class UserController extends AbstractController
 
         
         $token = $jwtEncoder->encode([
+                'roles' => $user->getRoles(),
                 'email' => $user->getEmail(),
                 'exp' => time() + 3600 // 1 hour expiration
             ]);

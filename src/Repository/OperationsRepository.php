@@ -19,22 +19,22 @@ class OperationsRepository extends ServiceEntityRepository
         parent::__construct($registry, Operations::class);
     }
 
-    // /**
-    //  * @return Operations[] Returns an array of Operations objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Operations[] Returns an array of Operations objects
+     */
+    
+    public function findByCodeEnvoi($pin)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('o.CodeEnvoi = :CodeEnvoi')
+            ->setParameter('CodeEnvoi', $pin)
+            // ->orderBy('o.id', 'ASC')
+            // ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Operations

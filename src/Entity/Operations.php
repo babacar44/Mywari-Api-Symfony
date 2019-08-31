@@ -22,12 +22,12 @@ class Operations
     private $CodeEnvoi;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Envoyeur;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
+     * @ORM\Column(type="datetime", length=255, nullable=true)
      */
     private $dateEnvoi;
 
@@ -42,7 +42,7 @@ class Operations
     private $commission;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Destinataire;
 
@@ -58,22 +58,22 @@ class Operations
     private $compte;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cniEnvoyeur;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $cniRecepteur;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telEnvoyeur;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telRecepteur;
 
@@ -108,6 +108,11 @@ class Operations
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateRetrait;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $statut;
 
    
 
@@ -330,6 +335,18 @@ class Operations
     public function setDateRetrait(?\DateTimeInterface $dateRetrait): self
     {
         $this->dateRetrait = $dateRetrait;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

@@ -24,7 +24,16 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
         ],
         'Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\IsGranted' => [
             'attributes' => [
-                1 => 'ROLE_SUPER_ADMIN',
+                1 => [
+                    'ROLE_SUPER_ADMIN',
+                    'ROLE_ADMIN_WARI',
+                ],
+            ],
+            'message' => [
+                1 => 'Vous n\'avez pas accces',
+            ],
+            'statusCode' => [
+                1 => 404,
             ],
         ],
     ],
