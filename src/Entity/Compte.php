@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
@@ -20,11 +22,13 @@ class Compte
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"compte"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"compte"})
      */
     private $numCompte;
 
@@ -32,16 +36,19 @@ class Compte
      * @ORM\Column(type="integer")
      * LessThanOrEqual:
      *               value: 0
+     * @Groups({"compte"})
      */
     private $solde;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Partenaire", inversedBy="partenaire")
+     * @Groups({"compte"})
      */
     private $partenaire;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Depot", mappedBy="depot")
+     * 
      * 
      */
     private $depots;

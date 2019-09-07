@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -18,8 +19,8 @@ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
-
-
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/api")
@@ -38,7 +39,7 @@ class UserController extends AbstractController
      * @Route("/inscription", name="admin_register", methods={"POST"})
      *
      * @IsGranted({"ROLE_SUPER_ADMIN", "ROLE_ADMIN_PARTENER"}, statusCode=404, message="Vous n'avez pas accces")
-     * 
+     * Symfony\Component\HttpFoundation\Response
      */
     public function register(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder,ValidatorInterface $validator, Request $request)
     {
@@ -158,8 +159,15 @@ class UserController extends AbstractController
        $entityErrors = $validator->validate($user);
         if(count($entityErrors) == 0)
         {        if ($form->isSubmitted() ) {
-
+            $propriete = $this->getUser()->getPropriete();
+            $userG = $this->getUser();
+            $partener = $userG->getPartenaire();
+        //  dump($partener);die;
+            $user->setPartenaire($partener);
+            $user->setPropriete($propriete);
+            // dump($user->setPropriete($propriete));die;
             $user->setImageFile($file);
+            $user->setStatut('actif');
 
             // Save entity
             $entityManager = $this->getDoctrine()->getManager();
@@ -201,7 +209,7 @@ class UserController extends AbstractController
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
                 'email' => $values->email,
             ]);
-
+                
             if (!$user) {
                 return new JsonResponse(['l\utilisateur n\'existe pas']);
             }
@@ -209,7 +217,7 @@ class UserController extends AbstractController
             $isValid = $this->passwordEncoder->isPasswordValid($user, $values->password);
 
             if (!$isValid) {
-                return new JsonResponse(['veuillez saisir un mot de passe']);
+                return new JsonResponse(['veuillez saisir un mot de passe valide']);
             }
             if ($user->getStatut()=='bloquer') {
 
@@ -222,7 +230,7 @@ class UserController extends AbstractController
                 'email' => $user->getEmail(),
                 'exp' => time() + 3600 // 1 hour expiration
             ]);
-
+            
         return new JsonResponse(['token' => $token]);
     }
 
@@ -251,7 +259,30 @@ class UserController extends AbstractController
     
     
 
+    /**
+     * @Route("/listerUser", name="User_list", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN_PARTENER")
+     */
+    public function userlist(UserRepository $userRepository,SerializerInterface $serializer){
 
+        $value = $this->getUser()->getPartenaire()->getUsers();
+        //  dump($value);
+
+        // $dataUser = $userRepository->UserPartener($value);
+        // dump($dataUser);die();
+
+        $data = $serializer->serialize($value, 'json',['groups'=>['user']]);
+
+
+        return new Response(
+            $data,
+            200,
+            [
+                'Content-Type' => 'application/json'
+            ]
+        );
+
+    }
 
 
 }

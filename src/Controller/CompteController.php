@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Compte;
+use App\Entity\Partenaire;
 use App\Form\CompteType;
 use App\Repository\CompteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +27,7 @@ class CompteController extends AbstractController
      * @Route("/addcompte", name="creer_compte", methods={"POST"})
      * @IsGranted("ROLE_SUPER_ADMIN")
      */
-    public function creer(Request $request, EntityManagerInterface $entityManager)
+    public function creerCompte(Request $request, EntityManagerInterface $entityManager)
     {
         // $value = json_decode($request->getContent());
         $newcompte = new Compte();
@@ -40,16 +41,23 @@ class CompteController extends AbstractController
         $random1 = random_int(101, 999);
         $random11 = random_int(101, 999);
         $random111 = random_int(151, 999);
+        $codecompte=date("i").date("m").date("s").date("H").date("Y").date("d");
 
         $random = ($random1 . $random11 . $random111);
 
 
-        $newcompte->setNumCompte($random);
+        $newcompte->setNumCompte($codecompte);
         $newcompte->setSolde($sol);
 
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             // $newcompte->setCompte($searchid[0]);
+
+            // $numNinea=$data['partenaire'];
+        
+            $newNinea =$this->getDoctrine()->getRepository(Partenaire::class)->findOneBy(['ninea'=>$data]);
+            // dump($newNinea); die();
+            $newcompte->setPartenaire($newNinea);
 
             $entityManager->persist($newcompte);
             $entityManager->flush();
@@ -78,7 +86,7 @@ class CompteController extends AbstractController
     {
         $newcompte = $compteRepository->findAll();
 
-        $data = $serializer->serialize($newcompte, 'json');
+        $data = $serializer->serialize($newcompte, 'json',['groups' => ['compte']]);
 
 
         return new Response(

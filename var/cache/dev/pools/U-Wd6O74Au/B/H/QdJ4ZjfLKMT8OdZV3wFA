@@ -6,6 +6,7 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
     $o = [
         clone (($p = &Registry::$prototypes)['Symfony\\Component\\Validator\\Constraints\\Email'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\Email')),
         clone ($p['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
+        clone ($p['Symfony\\Component\\Serializer\\Annotation\\Groups'] ?? Registry::p('Symfony\\Component\\Serializer\\Annotation\\Groups')),
         clone ($p['Doctrine\\ORM\\Mapping\\Column'] ?? Registry::p('Doctrine\\ORM\\Mapping\\Column')),
     ],
     null,
@@ -24,7 +25,14 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
                 ],
             ],
             'length' => [
-                2 => 255,
+                3 => 255,
+            ],
+        ],
+        'Symfony\\Component\\Serializer\\Annotation\\Groups' => [
+            'groups' => [
+                2 => [
+                    'partener',
+                ],
             ],
         ],
     ],
@@ -32,6 +40,7 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
         $o[0],
         $o[1],
         $o[2],
+        $o[3],
     ],
     []
 );

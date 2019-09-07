@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OperationsRepository")
@@ -18,31 +20,37 @@ class Operations
    
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"retired"})
      */
     private $CodeEnvoi;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $Envoyeur;
 
     /**
      * @ORM\Column(type="datetime", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $dateEnvoi;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"retired"})
      */
     private $Montant;
 
     /**
      * @ORM\Column(type="integer")
+     * 
      */
     private $commission;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $Destinataire;
 
@@ -64,16 +72,19 @@ class Operations
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $cniRecepteur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $telEnvoyeur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"retired"})
      */
     private $telRecepteur;
 
@@ -101,11 +112,13 @@ class Operations
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"retired"})
      */
     private $comRetrait;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"retired"})
      */
     private $dateRetrait;
 

@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 /**
  * @Route("/api")
  * 
@@ -42,15 +43,18 @@ class OperationsController extends AbstractController
 
         $form->submit($data);
 
+        
        
         if($form->isSubmitted() && $form->isValid()) 
         
         {
+            $codeEnvoi=date("s").date("m").date("Y").date("H").date("i");
+            $envoi->setCodeEnvoi($codeEnvoi);
             $envoi->setDateEnvoi(new \DateTime());
             $envoi->setStatut("envoyé");
             $valeur = $envoi->getMontant();
             $frais=$repo->findAllGreaterThanTarifs($valeur);
-            $tar = $frais[0]->getValeur();
+            $tar = $frais->getValeur();
             $envoi->setCommission($tar);
             $envoi->setEtat(($tar*30)/100);
             $envoi->setWari(($tar*40)/100);
@@ -59,6 +63,15 @@ class OperationsController extends AbstractController
             $envoi->setComRetrait(($tar*20)/100);
             $envoi->setUser($this->getUser());
             $envoi->setType("envoi");
+            $envoi->setCompte($this->getUser()->getCompte());
+
+            //  dump($this->getUser());
+            //  dump($this->getUser()->getCompte());
+            //  dump($envoi->setCompte($this->getUser()->getCompte()));
+            //  die();
+            
+
+
                             
             $entityManager=$this->getDoctrine()->getManager();
             $entityManager->persist($envoi);
@@ -118,26 +131,29 @@ class OperationsController extends AbstractController
             $form->submit($data);
         
             $pin = $retrait->getCodeEnvoi();
-            $trouverCode = $this->getDoctrine()->getRepository(Operations::class)->findByCodeEnvoi($pin);
-
-            if ($trouverCode)
+            $trouverCode = $this->getDoctrine()->getRepository(Operations::class)->findOneBy(["CodeEnvoi" => $pin]);
+            // dump($trouverCode);die();
+            if ($trouverCode )
             {
-                
-                $dest = $trouverCode[0]->getDestinataire();
-                $env = $trouverCode[0]->getEnvoyeur();
-                $som=$trouverCode[0]->getMontant();
-                $tel = $trouverCode[0]->getTelRecepteur();
-                $statut=$trouverCode[0]->getStatut();
-                $commission =$trouverCode[0]->getCommission();
-                $etat = $trouverCode[0]->getEtat();
-                $wari = $trouverCode[0]->getWari();
-                $comEnvoi=$trouverCode[0]->getComEnvoi();
-                $comRetrait = $trouverCode[0]->getComRetrait();
+             
+              
 
+                        $dest = $trouverCode->getDestinataire();
+                        $env = $trouverCode->getEnvoyeur();
+                        $som=$trouverCode->getMontant();
+                        $tel = $trouverCode->getTelRecepteur();
+                        $statut=$trouverCode->getStatut();
+                        $commission =$trouverCode->getCommission();
+                        $etat = $trouverCode->getEtat();
+                        $wari = $trouverCode->getWari();
+                        $comEnvoi=$trouverCode->getComEnvoi();
+                        $comRetrait = $trouverCode->getComRetrait();
 
+                        //dump($dest);die();
+                       
             }
-
-            if (!$trouverCode)
+            
+            if (!$trouverCode )
 
             {
                $data = [
@@ -150,7 +166,42 @@ class OperationsController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
 
+
+                    $compare = $this->getUser()->getCompte()->getSolde();
+                    // $caa = $compt->get
+                //  dump( $compt);die();
+                if ( $compare  <= $som ) {
+
+                    $data = [
+                        'status' => 400,
+                        'message' => "Solde insuffisant pour exécuter l'opération"
+                        ];
+                    
+                    return new JsonResponse($data, 400);
+
+                              
+                
+                
+                } 
+                // dump($trouverCode->getDateRetrait());die();
+
+                if (($trouverCode->getDateRetrait()) == null) {
+
+                    $data = [
+                        'status' => 400,
+                        'message' => "Code déja retiré"
+                        ];
+                    
+                    return new JsonResponse($data, 400);
+
+    
+                }
+                else {
+                    # code...
+              
+
                 $retrait->setDateRetrait(new \DateTime());
+                $retrait->setCompte($this->getUser()->getCompte());
                 $retrait->setStatut("retiré");
                 $retrait->setType("retrait");
                 $retrait->setUser($this->getUser());
@@ -164,12 +215,13 @@ class OperationsController extends AbstractController
                 $retrait->setTelRecepteur($tel);
 
 
+
                 $entityManager=$this->getDoctrine()->getManager();
                 $entityManager->persist($retrait);
             
             
                 $newcompte = $retrait->getCompte();
-                $valeur = $newcompte->getSolde()+$trouverCode[0]->getMontant()+$trouverCode[0]->getComRetrait();
+                $valeur = $newcompte->getSolde()+$trouverCode->getMontant()+$trouverCode->getComRetrait();
                 $newcompte->setSolde($valeur);
 
 
@@ -178,7 +230,7 @@ class OperationsController extends AbstractController
 
                 $data = [
                     'status' => 201,
-                    'message' => 'ok',
+                    'message' => 'Retrait validé',
                     'commission' => $retrait->getComRetrait().'  CFA',
                     'nouvel solde' => $newcompte->getSolde().'  CFA'
                 ];
@@ -189,14 +241,42 @@ class OperationsController extends AbstractController
             }
                 $data = [
                     'status' => 400,
-                    'message' => 'pas ok'
+                    'message' => 'Operations Impossible'
                 ];
                 
             return new JsonResponse($data, 400);
         }       
         
-    
+    }
 
+      /**   
+     * @Route("/codeFinder", name="operation_recherche")
+     * 
+     * @IsGranted({"ROLE_ADMIN", "ROLE_USER"}, statusCode=404, message="Vous n'avez pas accces")
+     */
+    public function rechercherCode(Request $request,
+    SerializerInterface $serializer,OperationsRepository $repo){
 
+        $retrait = new Operations();
+        $form = $this->createForm(RetraitType::class, $retrait);
+        $data = $request->request->all();
+        $form->submit($data);
     
+        $pin = $retrait->getCodeEnvoi();
+        // dump($pin);
+
+        $trouverCode = $repo->findOneBy(["CodeEnvoi" => $pin]);
+    //  dump($trouverCode);
+        if ($trouverCode)
+        {
+            $donnee = $serializer->serialize($trouverCode, 'json',['groups'=>['retired']]);
+
+            //dump($donnee);
+            return new Response($donnee, 200, [
+                'Content-Type' => 'application/json'
+            ]);
+        }
+        
+}
+
 }

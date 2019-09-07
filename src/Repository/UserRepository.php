@@ -47,4 +47,20 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+      /**
+      * @return User[] Returns an array of User objects
+     */
+    
+    public function UserPartener($value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.partenaire = : partenaire')
+            ->setParameter('partenaire', $value)
+            // ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

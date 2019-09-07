@@ -47,11 +47,14 @@ class DepotController extends AbstractController
         }
         if($form->isSubmitted() ){
         $depot->setDateDepot(new \DateTime());
-        $numComp=$data['depot'];
+        // $numComp=$data['depot'];
         
-         $newcompte =$this->getDoctrine()->getRepository(Compte::class)->findOneBy(['numCompte'=>$numComp]);
+         $newcompte =$this->getDoctrine()->getRepository(Compte::class)->findOneBy(['numCompte'=>$data]);
 
-         $newcompte->setSolde($newcompte->getSolde() + $depot->getMontant());
+            if ($newcompte) {
+                # code...
+            
+        //  $newcompte->setSolde($newcompte->getSolde() + $depot->getMontant());
             // dump($this->getUser());
         //     $depot->setDepot($searchId[0]);
         $depot->setCaissier($this->getUser());
@@ -80,6 +83,7 @@ class DepotController extends AbstractController
         ];
         
         return new JsonResponse($data, 201);
+    }
     }
     $data = [
         'status' => 400,

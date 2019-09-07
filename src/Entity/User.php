@@ -38,12 +38,14 @@ class User implements UserInterface
      * @Assert\Email(message = "The email {{ value }} is not a valid email.")
      * @Assert\NotBlank(message = "Email cannot be empty.")
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user"})
      * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"user"})
      * 
      */
     private $roles = [];
@@ -62,16 +64,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user"})
      */
     private $nomComplet;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user"})
      */
     private $propriete;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user"})
      */
     private $adresse;
 
@@ -81,11 +86,13 @@ class User implements UserInterface
      *     pattern="/^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\-]*$/",
      *     match=true,
      *     message="Votre numero ne doit pas contenir de lettre")
+     * @Groups({"user"})
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user"})
      */
     private $statut;
 
@@ -130,6 +137,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Compte", inversedBy="users")
+     *
      */
     private $compte;
 

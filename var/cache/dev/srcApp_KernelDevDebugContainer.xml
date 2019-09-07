@@ -6760,6 +6760,13 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
+    <service id=".service_locator.RMm5ueP" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="repo" type="service" id="App\Repository\OperationsRepository"/>
+        <argument key="serializer" type="service" id="serializer"/>
+      </argument>
+    </service>
     <service id=".service_locator.H3qnu8f" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6785,6 +6792,14 @@
         <argument key="validator" type="service" id="debug.validator"/>
       </argument>
     </service>
+    <service id=".service_locator.iW_buO_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="partenaire" type="service" id=".errored..service_locator.iW_buO_.App\Entity\Partenaire"/>
+        <argument key="partenaireRepository" type="service" id="App\Repository\PartenaireRepository"/>
+        <argument key="serializer" type="service" id="serializer"/>
+      </argument>
+    </service>
     <service id=".service_locator.2B8PUum" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6799,29 +6814,42 @@
         <argument key="jwtEncoder" type="service" id="lexik_jwt_authentication.encoder.lcobucci"/>
       </argument>
     </service>
-    <service id=".service_locator.f1H1a68" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.OIueEnh" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\CompteController::creer" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="serializer" type="service" id="serializer"/>
+        <argument key="userRepository" type="service" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.JSMn7y8" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\CompteController::creerCompte" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\CompteController::list" type="service" id=".service_locator.AK4A8Fa"/>
         <argument key="App\Controller\DepotController::deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\OperationsController::envoi" type="service" id=".service_locator.J4Wn4yL"/>
+        <argument key="App\Controller\OperationsController::rechercherCode" type="service" id=".service_locator.RMm5ueP"/>
         <argument key="App\Controller\OperationsController::retrait" type="service" id=".service_locator.3sUBkGM"/>
         <argument key="App\Controller\PartenaireController::createPartenaire" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\PartenaireController::list" type="service" id=".service_locator.eIEYWuf"/>
+        <argument key="App\Controller\PartenaireController::listbyid" type="service" id=".service_locator.iW_buO_"/>
         <argument key="App\Controller\PartenaireController::update" type="service" id=".service_locator.fDbIXxi"/>
         <argument key="App\Controller\UserController::login" type="service" id=".service_locator.QxqSsHw"/>
         <argument key="App\Controller\UserController::register" type="service" id=".service_locator.2B8PUum"/>
-        <argument key="App\Controller\CompteController:creer" type="service" id=".service_locator.ZIsCxOI"/>
+        <argument key="App\Controller\UserController::userlist" type="service" id=".service_locator.OIueEnh"/>
+        <argument key="App\Controller\CompteController:creerCompte" type="service" id=".service_locator.ZIsCxOI"/>
         <argument key="App\Controller\CompteController:list" type="service" id=".service_locator.AK4A8Fa"/>
         <argument key="App\Controller\DepotController:deposer" type="service" id=".service_locator.7zWnKy7"/>
         <argument key="App\Controller\OperationsController:envoi" type="service" id=".service_locator.J4Wn4yL"/>
+        <argument key="App\Controller\OperationsController:rechercherCode" type="service" id=".service_locator.RMm5ueP"/>
         <argument key="App\Controller\OperationsController:retrait" type="service" id=".service_locator.3sUBkGM"/>
         <argument key="App\Controller\PartenaireController:createPartenaire" type="service" id=".service_locator.H3qnu8f"/>
         <argument key="App\Controller\PartenaireController:list" type="service" id=".service_locator.eIEYWuf"/>
+        <argument key="App\Controller\PartenaireController:listbyid" type="service" id=".service_locator.iW_buO_"/>
         <argument key="App\Controller\PartenaireController:update" type="service" id=".service_locator.fDbIXxi"/>
         <argument key="App\Controller\UserController:login" type="service" id=".service_locator.QxqSsHw"/>
         <argument key="App\Controller\UserController:register" type="service" id=".service_locator.2B8PUum"/>
+        <argument key="App\Controller\UserController:userlist" type="service" id=".service_locator.OIueEnh"/>
       </argument>
     </service>
     <service id=".service_locator.LtnrEkg" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -7174,12 +7202,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.f1H1a68"/>
+      <argument type="service" id=".service_locator.JSMn7y8"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.f1H1a68"/>
+      <argument type="service" id=".service_locator.JSMn7y8"/>
     </service>
     <service id="api_platform.swagger.normalizer.api_gateway.inner" class="ApiPlatform\Core\Swagger\Serializer\DocumentationNormalizer" public="false">
       <argument type="service" id="api_platform.metadata.resource.metadata_factory.cached"/>
@@ -7217,6 +7245,7 @@
       <argument type="service" id="api_platform.path_segment_name_generator.underscore"/>
     </service>
     <service id=".errored..service_locator.fDbIXxi.App\Entity\Partenaire" class="App\Entity\Partenaire"/>
+    <service id=".errored..service_locator.iW_buO_.App\Entity\Partenaire" class="App\Entity\Partenaire"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id=".service_locator.pPUCPN5"/>
       <argument type="collection">
@@ -7691,7 +7720,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image" public="false"/>
     <service id="Vich\UploaderBundle\Templating\Helper\UploaderHelper" alias="vich_uploader.templating.helper.uploader_helper" public="false"/>
     <service id="Vich\UploaderBundle\Twig\Extension\UploaderExtension" alias="vich_uploader.twig.extension.uploader" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.f1H1a68"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.JSMn7y8"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>

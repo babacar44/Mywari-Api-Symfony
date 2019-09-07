@@ -5,6 +5,7 @@ namespace Symfony\Component\VarExporter\Internal;
 return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
     $o = [
         clone (($p = &Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Column'] ?? Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+        clone ($p['Symfony\\Component\\Serializer\\Annotation\\Groups'] ?? Registry::p('Symfony\\Component\\Serializer\\Annotation\\Groups')),
         clone ($p['Symfony\\Component\\Validator\\Constraints\\NotBlank'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\NotBlank')),
         clone ($p['Symfony\\Component\\Validator\\Constraints\\Regex'] ?? Registry::p('Symfony\\Component\\Validator\\Constraints\\Regex')),
     ],
@@ -18,11 +19,11 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
                 255,
             ],
             'message' => [
-                1 => 'telephone cannot be empty.',
+                2 => 'telephone cannot be empty.',
                 'Votre numero ne doit pas contenir de lettre',
             ],
             'groups' => [
-                1 => [
+                2 => [
                     'Default',
                 ],
                 [
@@ -30,7 +31,14 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
                 ],
             ],
             'pattern' => [
-                2 => '/^(\\+[1-9][0-9]*(\\([0-9]*\\)|-[0-9]*-))?[0]?[1-9][0-9\\-]*$/',
+                3 => '/^(\\+[1-9][0-9]*(\\([0-9]*\\)|-[0-9]*-))?[0]?[1-9][0-9\\-]*$/',
+            ],
+        ],
+        'Symfony\\Component\\Serializer\\Annotation\\Groups' => [
+            'groups' => [
+                1 => [
+                    'partener',
+                ],
             ],
         ],
     ],
@@ -38,6 +46,7 @@ return $getExpiry ? PHP_INT_MAX : Hydrator::hydrate(
         $o[0],
         $o[1],
         $o[2],
+        $o[3],
     ],
     []
 );

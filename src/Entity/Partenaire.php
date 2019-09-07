@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * 
@@ -20,28 +21,33 @@ class Partenaire
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"partener"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"partener"})
      */
     private $ninea;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "raisonSociale cannot be empty.")
+     * @Groups({"partener"})
      */
-    private $raisonSociale;
+    private $raisonSociale; 
 
     /**
      * @ORM\Column(type="string", length=255)
      *  @Assert\NotBlank(message = "nomComplet cannot be empty.")
+     * @Groups({"partener"})
      */
     private $nomComplet;
 
     /**
      * @ORM\Column(type="bigint", length=255)
+     * @Groups({"partener"})
      * @Assert\NotBlank(message = "telephone cannot be empty.")
      * @Assert\Regex(
      *     pattern="/^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\-]*$/",
@@ -54,7 +60,7 @@ class Partenaire
     /**
      *@Assert\Email(message = "Email n'est pas bon.")
      * @Assert\NotBlank(message = "Email cannot be empty.")
-     * 
+     * @Groups({"partener"})
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -63,16 +69,19 @@ class Partenaire
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "adresse cannot be empty.")
+     * @Groups({"partener"})
      */
     private $adresse;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Compte", mappedBy="partenaire")
+     * 
      */
     private $partenaire;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"partener"})
      */
     private $statut;
 
